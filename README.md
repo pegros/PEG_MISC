@@ -6,7 +6,7 @@
 ## Introduction
 
 This package contains a set of standalone LWC components adressing very specific and simple use cases.
-Their configuration is very simple and is done directly from teh App Builder.
+Their configuration is very simple and is done directly from the App Builder.
 
 These components were built as contributions/examples for former & ongoing Advisory assignments by 
 [Pierre-Emmanuel Gros](https://github.com/pegros). 
