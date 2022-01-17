@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Related List KPIs</masterLabel>
+
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_shade"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="relList1"
+                        label="Related List #1"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="1st Related List to display"/>
+            <property   name="relList2"
+                        label="Related List #2"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="2nd Related List to display"/>
+            <property   name="relList3"
+                        label="Related List #3"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="3rd Related List to display"/>
+            <property   name="relList4"
+                        label="Related List #4"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="4th Related List to display"/>
+            <property   name="relList5"
+                        label="Related List #5"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="5th Related List to display"/>
+            <property   name="relList6"
+                        label="Related List #6"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="6th Related List to display"/>
+                        
+            <property   name="showRefresh"
+                        label="Show Refresh?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show refresh button."/>
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_shade"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="relList1"
+                        label="Related List #1"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="1st Related List to display"/>
+            <property   name="relList2"
+                        label="Related List #2"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="2nd Related List to display"/>
+            <property   name="relList3"
+                        label="Related List #3"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="3rd Related List to display"/>
+            <property   name="relList4"
+                        label="Related List #4"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="4th Related List to display"/>
+            <property   name="relList5"
+                        label="Related List #5"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="5th Related List to display"/>
+            <property   name="relList6"
+                        label="Related List #6"
+                        type="String"
+                        datasource="apex://sfpegRelatedListSelector_CTL"
+                        description="6th Related List to display"/>
+
+            <property   name="showRefresh"
+                        label="Show Refresh?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show refresh button."/>
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!objectApiName}"
+                        description="API Name of Current Object."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!recordId}"
+                        description="ID of current Record"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

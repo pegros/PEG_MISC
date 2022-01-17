@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Value Selector</masterLabel>
+
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property   name="headerTitle"
+                        label="Title"
+                        type="String" 
+                        description="Title (optional) displayed before the selector"/>
+            <property   name="displayMode"
+                        label="Display Mode"
+                        type="String"
+                        datasource="path,progress,buttons,tabs,tabsV,picklist,radio"
+                        default="picklist"
+                        description="Display mode for the selector"/>
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_default"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="recordField"
+                        label="Current Record Field"
+                        type="String"
+                        datasource="apex://sfpegPicklistRecordSelector_CTL"
+                        description="Picklist field to be used on current record."/>
+            <property   name="userField"
+                        label="Current User Field"
+                        type="String"
+                        datasource="apex://sfpegPicklistUserSelector_CTL"
+                        description="Picklist field to be used on current user (if no Record picklist selected)."/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="headerTitle"
+                        label="Title"
+                        type="String" 
+                        description="Title (optional) displayed before the selector"/>
+            <property   name="displayMode"
+                        label="Display Mode"
+                        type="String"
+                        datasource="path,progress,buttons,tabs,tabsV,picklist,radio"
+                        default="picklist"
+                        description="Display mode for the selector"/>
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_default"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="recordField"
+                        label="Current Record Field"
+                        type="String"
+                        datasource="apex://sfpegPicklistRecordSelector_CTL"
+                        description="Picklist field to be used on current record."/>
+            <property   name="userField"
+                        label="Current User Field"
+                        type="String"
+                        datasource="apex://sfpegPicklistUserSelector_CTL"
+                        description="Picklist field to be used on current user (if no Record picklist selected)."/>
+            
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!objectApiName}"
+                        description="API Name of Current Object."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!recordId}"
+                        description="ID of current Record"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
