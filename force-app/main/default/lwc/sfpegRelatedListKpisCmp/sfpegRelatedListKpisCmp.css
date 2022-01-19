@@ -1,37 +1,132 @@
-.kpiContainer{
-    padding: 10px;
+/* KPI Container for colored circle */
+.kpiContainer {
     border-radius:50%;
     position: relative;
-    margin-right: 15px;
-    border: 1px solid white !important;
+    border: 1px solid !important;
+    /*border-color: var(--lwc-colorBackgroundInputDisabled) !important;*/
+    border-color: var(--lwc-colorBackgroundInputCheckboxDisabled) !important;
 }
 .kpiContainer[data-kpi-value="0"] {
-    /*background-color: var(--lwc-colorBackgroundInputCheckboxDisabled) !important;*/
-    background-color: var(--lwc-colorBackgroundInputDisabled) !important;
-    border: 1px solid white !important;
+    background-color: var(--lwc-colorBackgroundInputCheckboxDisabled) !important;
 }
+.kpiContainer-large{
+    padding: var(--lwc-spacingXxSmall); /*5px*/
+    margin-right: var(--lwc-spacingLarge);
+}
+.kpiContainer-medium{
+    padding: var(--lwc-spacingXxSmall); /*5px*/
+    margin-right: var(--lwc-spacingMedium);
+}
+.kpiContainer-small{
+    padding: var(--lwc-spacingXxxSmall); /*5px*/
+    margin-right: var(--lwc-spacingSmall);
+}
+
+/* KPI Display Size */
 .kpiValue {
-    background-color: white;
+    background-color: var(--lwc-colorBackgroundInputDisabled) !important;
     border-radius:50%;
-    padding: 20px;
-    padding-left:5px;
-    padding-right:10px;
-    min-height: 65px;
-    min-width: 65px;
     text-align: center;
 }
+.kpiValue-large {
+    padding-top: 20px;
+    padding-bottom: 21px;
+    padding-left:1px;
+    padding-right:4px;
+    min-height: 66px;
+    min-width: 66px;
+}
+.kpiValue-medium {
+    padding-top: 15px;
+    padding-bottom: 16px;
+    padding-left:0px;
+    padding-right:3px;
+    min-height: 51px;
+    min-width: 51px;
+}
+.kpiValue-small {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left:0px;
+    padding-right:2px;
+    min-height: 40px;
+    min-width: 40px;
+}
+
+/* KPI Icon Location */
 .kpiIcon {
     position: absolute;
-    right: -15px;
-    top: 26px;
-    border: 1px solid white;
-    background-color: white;
-    border-top-right-radius: var(--lwc-borderRadiusMedium) !important;
-    border-bottom-right-radius: var(--lwc-borderRadiusMedium) !important;
+    /*border: 1px solid;
+    border-color: red !important;
+    /*border-color: var(--lwc-colorBackgroundInputDisabled) !important;
+    background-color: var(--lwc-colorBackgroundInputDisabled) !important;
+    background-color: green !important;*/
 }
+.kpiIcon-large {
+    right: -12px;
+    top: 23px;
+    /*border-radius: var(--lwc-borderRadiusMedium) !important;*/
+}
+.kpiIcon-medium {
+    right: -8px;
+    top: 20px;
+    /*border-radius: var(--lwc-borderRadiusMedium) !important;*/
+}
+.kpiIcon-small {
+    right: -9px;
+    top: 12px;
+    /*border-radius: var(--lwc-borderRadiusMedium) !important;*/
+}
+.kpiIconElement {
+    border: 1px solid !important;
+    border-color: var(--lwc-colorBackgroundInputDisabled) !important;
+}
+.kpiIconElement[data-kpi-value="0"] {
+    background-color: var(--lwc-colorBackgroundInputCheckboxDisabled) !important;
+}
+
+/* Misc other classes */
 .kpiNumber {
-    font-weight: bold;
+    /*font-weight: bold;*/
+    font-weight: normal;
 }
 .kpiAction {
     cursor: pointer !important; 
+}
+.kpiTitle {
+    width: calc(100% + 25px);
+    position: absolute;
+    top: -20px;
+    left: -12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* KPI Badge font size */
+.kpiBadgeContainer {
+    width: calc(100% + 10px);
+    position: absolute;
+    bottom: -13px;
+    left: -5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+.kpiBadge {
+    font-weight: normal !important;
+    border-color: var(--lwc-colorBorderButtonDefault) !important;
+    display: inline-block;
+    min-width: 50%;
+}
+.kpiBadge-large {
+    font-size: 13px !important;/* --lwc-fontSize3 : 13*/
+}
+.kpiBadge-medium {
+    font-size: 11px !important;/* --lwc-fontSize2 : 12*/
+}
+.kpiBadge-small {
+    font-size: 9px !important;/* --lwc-fontSize1 : 10 */
 }

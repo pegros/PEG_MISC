@@ -33,16 +33,20 @@ general configuration guidelines and technical implementation principles.
 #### Introduction
 
 The **sfpegRelatedListKpisCmp** component enables to display record counts for up to 6 related lists
-of the current record of a Lightning page in a graphical way.
+of the current record of a Lightning page in a graphical way. It provides three size variants to 
+cope with screen size constraints and background CSS may also be customised.
 
 ![Related List KPIs](/media/sfpegRelatedListKpis.png)
 
 For each related list selected, it fetches the icon and color of the related object type and displays
-the count value within a circle (coloured only if the count is greater than 0).
+the count value within a circle (coloured only if the count is greater than 0). A title may be set above
+and a second KPI displayed below in a badge (this KPI corresponding to a sum of a number/currency field).
+
+KPIs are rounded by default to respect the widget size constraints and circular layout, but the precise
+value is available upon hovering in a title popup.
+KPI icons are clickable and redirect the user to the corresponding related list page.
+
 As an option, it may display a _refresh_ button to force a recount.
-
-Counts are rounded by default to respect the widget circular layout, but the precise value is available upon hovering in a title popup. KPI widgets are clickable and redirect the user to the corresponding related list page.
-
 
 #### Configuration
 
@@ -52,8 +56,13 @@ All the configuration of the **sfpegRelatedListKpisCmp** component is done in th
 
 The following properties are available:
 * `Wrapping CSS Class` to set the style of the component container, e.g. to act on its border, padding, background color... leveraging standard SLDS classes available.
-* `Related List #xxx` to select the related list for which KPI widgets should be displayed (as a picklist of all related lists available on the object). Max. 6 of them may be selected.
+* `Display Size` to set the size of the displayed KPI widgets (small, medium, large).
+* KPI fields (up to 6 configurable):
+    * `Label #xxx` to set the (optional) label associated to the KPI (free text, supporting custom labels)
+    * `Related List #xxx` to select the underlying related list for which the KPI should be displayed (as a picklist of all related lists available on the object)
+    * `Sum Field #xxx` to define a field which should be summarized in the badge below the main count, as a JSON string providing the field API `mame` and its `format` (_currency_, _number_ or default _integer_), e.g. `{"name":"Number__c","format":"number"}`
 * `Show Refresh?` to display a _refresh_ button next to the KPI widgets.
+* `Inverse Text?` to display labels in inverse mode (for dark backgrounds).
 * `Debug?` to activate debug logs in the browser console and present some confighurayion details below the component.
 
 

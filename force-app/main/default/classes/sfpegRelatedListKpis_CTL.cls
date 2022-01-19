@@ -40,31 +40,49 @@ public with sharing class sfpegRelatedListKpis_CTL {
     * @exception    AuraHandledException    Raised if no configuration found for the provided name
     ***/
     @AuraEnabled
-    public static Map<String,Integer> getCounts(final String objectName, final String recordId, final list<String> relations) {
+    public static Map<String,Object> getCounts(final String objectName, final String recordId, final list<String> relations) {
         System.debug(LoggingLevel.FINE,'getCounts: START with object name ' + objectName);
         System.debug(LoggingLevel.FINE,'getCounts: and recordId ' + recordId);
         System.debug(LoggingLevel.FINE,'getCounts: and relations ' + relations);
 
         List<String> queries = new List<String>();
+        Map<String,String> sumMap = new Map<String,String>();
         Integer groupCount = 0;
         String currentQuery;
         for (String iter : relations) {
             System.debug(LoggingLevel.FINE,'getCounts: processing relation ' + iter);
+
+            List<String> iterParts = iter.split('/');
+            System.debug(LoggingLevel.FINE,'getCounts: iterParts split ' + iterParts);
+            if (iterParts.size() > 1) {
+                System.debug(LoggingLevel.FINE,'getCounts: registering sum field for relation');
+                sumMap.put(iterParts[0],iterParts[1]);
+            }
+
             groupCount += 1;
             if (groupCount == 1) {
                 System.debug(LoggingLevel.FINE,'getCounts: initializing query');
                 currentQuery = 'select ';
             }
-            currentQuery += '(select id from ' + iter + '),';
+            if (iterParts.size() > 1) {
+                System.debug(LoggingLevel.FINE,'getCounts: fetching id and field ' + iterParts[1]);
+                currentQuery += '(select id, ' + iterParts[1] + ' from ' + iterParts[0] + '),';
+            }
+            else {
+                System.debug(LoggingLevel.FINE,'getCounts: fetching only id field');
+                currentQuery += '(select id from ' + iterParts[0] + '),';
+            }
             if (groupCount == 3) {
-                System.debug(LoggingLevel.FINE,'getCounts: finalizing query');
+                System.debug(LoggingLevel.FINE,'getCounts: finalizing query ' + iterParts[0]);
                 currentQuery = currentQuery.removeEnd(',') + ' from ' + objectName + ' where id = \'' + recordId + '\' limit 1';
                 System.debug(LoggingLevel.FINE,'getCounts: registering query ' + currentQuery);
                 queries.add(currentQuery);
                 groupCount = 0;
             }
         }
-        System.debug(LoggingLevel.FINE,'getCounts: all relation processed');
+        System.debug(LoggingLevel.FINE,'getCounts: all relations processed');
+        System.debug(LoggingLevel.FINE,'getCounts: sumMap init ' + sumMap);
+
         if (groupCount != 0) {
             System.debug(LoggingLevel.FINE,'getCounts: finalizing last query');
             currentQuery = currentQuery.removeEnd(',') + ' from ' + objectName + ' where id = \'' + recordId + '\' limit 1';
@@ -73,7 +91,7 @@ public with sharing class sfpegRelatedListKpis_CTL {
         } 
         System.debug(LoggingLevel.FINE,'getCounts: queries prepared ' + queries);
 
-        Map<String,Integer> results = new Map<String,Integer>();
+        Map<String,Object> results = new Map<String,Object>();
         for (String iter : queries) {
             System.debug(LoggingLevel.FINE,'getCounts: executing query ' + iter);
             sObject recordData = Database.query(iter);
@@ -84,9 +102,24 @@ public with sharing class sfpegRelatedListKpis_CTL {
 
             for (String iterField : fieldsToValue.keySet()) {
                 if ((iterField != 'Id') && (iterField != 'RecordTypeId')) {
-                    System.debug(LoggingLevel.FINE,'getCounts: processing field ' + iterField);
+                    System.debug(LoggingLevel.FINE,'getCounts: processing relation ' + iterField);
                     List<Object> relatedList = (List<Object>)(fieldsToValue.get(iterField));
-                    results.put(iterField,relatedList.size());
+                    Map<String,Object> iterFieldVal = new Map<String,Object>{
+                        'count' => relatedList.size()
+                    };
+                    if (sumMap.containsKey(iterField)) {
+                        String sumField = sumMap.get(iterField);
+                        System.debug(LoggingLevel.FINE,'getCounts: summing field ' + sumField);
+                        Double iterFieldSum = 0;
+                        for (Object iterRcd : relatedList) {
+                            SObject iterObj = (SObject) iterRcd;
+                            iterFieldSum += (Double) (iterObj.get(sumField));
+                        }
+                        System.debug(LoggingLevel.FINE,'getCounts: summing done ' + iterFieldSum);
+                        iterFieldVal.put('sum',iterFieldSum);
+                    }
+                    System.debug(LoggingLevel.FINE,'getCounts: returning relation value ' + iterFieldVal);
+                    results.put(iterField,(Object)iterFieldVal);
                 }
                 else {
                     System.debug(LoggingLevel.FINE,'getCounts: ignoring standard field ' + iterField);

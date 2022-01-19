@@ -38,7 +38,12 @@ global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.Dyna
         'AttachedContentNote' => 'Note',
         'ActivityHistory' => 'Task2',
         'OpenActivity' => 'Events',
-        'TopicAssignment' => 'Topic'
+        'TopicAssignment' => 'Topic',
+        'EmailMessage' => 'Email',
+        'ActionPlan' => 'Entitlement'
+    };
+    static Map<String,String> standardCustomObjectMap = new Map<String,String>{
+        'BranchUnitRelatedRecord' => 'Custom16'
     };
 
     /***
@@ -108,6 +113,11 @@ global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.Dyna
                     if (iterIsCustomObject) {
                         String iconName = getCustomObjectIcon(iterObjectName);
                         iterIconData = '"icon":"custom:' + iconName + '","class":"slds-icon-custom-' + iconName + '"';
+                    }
+                    else if (standardCustomObjectMap.containsKey(iterObjectName)) {
+                        System.debug(LoggingLevel.FINEST,'getValues: overriding object name ' + iterObjectName);
+                        iterObjectName = standardCustomObjectMap.get(iterObjectName);
+                        iterIconData = '"icon":"custom:' + iterObjectName.tolowercase() + '","class":"slds-icon-custom-' + iterObjectName.tolowercase() + '"';
                     }
                     else {
                         if (standardObjectMap.containsKey(iterObjectName)) {

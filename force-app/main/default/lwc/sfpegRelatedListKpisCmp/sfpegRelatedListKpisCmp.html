@@ -8,20 +8,25 @@
                     <template for:each={kpiList} for:item="iter">
                         <lightning-layout-item key={iter.name} padding="around-small">
                             <div class={iter.class} data-kpi-value={iter.value} >
-                                <div class="slds-theme_default kpiValue kpiAction" data-kpi-name={iter.name} onclick={handleKpiClick} >
-                                    <!--
-                                    <lightning-formatted-number value={iter.value}      title={iter.value}
-                                                                format-style="decimal"  
-                                                                class="slds-text-heading_medium kpiNumber">
-                                    </lightning-formatted-number>
-                                    -->
-                                    <p class="slds-text-heading_medium kpiNumber" title={iter.valueFull}>{iter.value}</p>
+                                <template if:true={iter.label}>
+                                    <div class={titleClass} title={iter.label}>{iter.label}</div>
+                                </template>
+                                <div class={kpiValueClass} >
+                                    <p class={numberClass} title={iter.valueFull}>{iter.value}</p>
                                 </div>
-                                <div class="kpiIcon kpiAction" data-kpi-name={iter.name} onclick={handleKpiClick}>
-                                    <lightning-icon icon-name={iter.icon}   size="medium"
-                                                    title={iter.name}>
+                                <div    class={kpiIconClass}
+                                        data-kpi-name={iter.name}   data-kpi-value={iter.value}
+                                        onclick={handleKpiClick}>
+                                    <lightning-icon icon-name={iter.icon}   size={iconSize}
+                                                    title={iter.name}       class="kpiIconElement"
+                                                    data-kpi-value={iter.value} >
                                     </lightning-icon>
                                 </div>
+                                <template if:true={iter.sum}>                                    
+                                    <div class={badgeClass} title={iter.sum.valueFull}>
+                                        <span class={badgeValueClass} >{iter.sum.value}</span>
+                                    </div>
+                                </template>
                             </div>
                         </lightning-layout-item>
                     </template>
@@ -30,7 +35,7 @@
                     <template if:true={showRefresh}>
                         <lightning-layout-item padding="around-small">
                             <lightning-button-icon  icon-name="utility:refresh" 
-                                                    size="small"    variant="border-filled"
+                                                    size={iconSize}    variant="border-filled"
                                                     onclick={handleRefresh}>
                             </lightning-button-icon>
                         </lightning-layout-item>
@@ -71,18 +76,20 @@
         <template if:true={isDebug}>
             <div class="slds-box slds-theme_default slds-text-color_default slds-m-top_x-small">
                 <dl class="slds-dl_horizontal slds-text-align_left">
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #1:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList1}</dd>
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #2:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList2}</dd>
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #3:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList3}</dd>
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #4:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList4}</dd>
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #5:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList5}</dd>
-                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #6:</dt>
-                    <dd class="slds-dl_horizontal__detail">{relList6}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #1 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList1} / {field1}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #2 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList2} / {field1}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #3 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList3} / {field3}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #4 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList4} / {field4}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #5 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList5} / {field5}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">KPI #6 (list/field):</dt>
+                    <dd class="slds-dl_horizontal__detail">{relList6} / {field6}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Margins:</dt>
+                    <dd class="slds-dl_horizontal__detail">{marginClass}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail">
                         <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
