@@ -76,6 +76,10 @@ _Notes_:
 * Colors and icons are automatically computed out of the related object by the **sfpegRelatedListSelector_CTL** class:
     * some standard objects do not have an actual dedicated icon and some mapping may occur to associate them a correct value (e.g. _AttachedContentDocument_ is replaced by _File_, _AttachedContentNote_ by _Note_...)
     * for the custom objects, an analysis of the `Schema.describeTabs()` information is done to retrieve the icon associated to the object. A tab must therefore be defined for the custom object and it must be displayed in at least one application for the logic to operate properly.
+* Component background may be easily altered by leveraging the standard [SLDS theme classes](https://www.lightningdesignsystem.com/utilities/themes/)
+    * *slds-theme_default* set by default in the configuration
+    * the second example leverages the *slds-theme_shade* value
+    * the first example leverages the *slds-popover_feature* class which injects a standard background image.
 
 
 ### **sfpegValueSelectorCmp** Component
