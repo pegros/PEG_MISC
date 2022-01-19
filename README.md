@@ -33,8 +33,9 @@ general configuration guidelines and technical implementation principles.
 #### Introduction
 
 The **sfpegRelatedListKpisCmp** component enables to display record counts for up to 6 related lists
-of the current record of a Lightning page in a graphical way. It provides three size variants to 
-cope with screen size constraints and background CSS may also be customised.
+of the current record of a Lightning page in a graphical way. It provides three size variants
+(shown in the snapshot below) to cope with screen size constraints and wrapping CSS may also be customised
+(e.g. to alter margins or background color).
 
 ![Related List KPIs](/media/sfpegRelatedListKpis.png)
 
