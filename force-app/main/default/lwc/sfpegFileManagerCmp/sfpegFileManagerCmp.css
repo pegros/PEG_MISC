@@ -1,0 +1,27 @@
+/* Image classes */
+.missingImage {
+    max-height: 150px;
+}
+.fileImage {
+    cursor: pointer !important; 
+    max-width: 100%;
+}
+.fileImage-border {
+    border: 2px solid;
+    border-color: var(--lwc-colorBorder);
+}
+.fileImage-x-small {
+    max-height: var(--lwc-sizeXxSmall); /* 75px;*/
+}
+.fileImage-small {
+    max-height: var(--lwc-sizeXSmall); /*100px;*/
+}
+.fileImage-medium {
+    max-height: var(--lwc-sizeSmall); /*200px;*/
+}
+.fileImage-large {
+    max-height:  var(--lwc-sizeMedium); /* 300px */
+}
+.fileImage-x-large {
+    max-height:  var(--lwc-sizeLarge);
+}

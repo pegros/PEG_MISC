@@ -1,0 +1,110 @@
+<template>
+    <div class={wrapperCss}>
+        <lightning-card title={cardTitle} icon-name={cardIcon}>
+            <template if:true={isReady}>
+                <div class={globalContainerClass}>
+                    <div class={imageContainerClass}>
+                        <!-- File Display -->
+                        <template if:true={contentDocumentId}>
+                            <div    onclick={showPreview} class="slds-p-horizontal_medium">
+                                <img src={fileUrl} class={imageClass} alt="Loading..."></img>
+                            </div>
+                        </template>
+
+                        <!-- File Upload -->
+                        <template if:false={contentDocumentId}>
+                            <template if:true={showUpload}>
+                                <div class="slds-grid slds-wrap">
+                                    <div    class="slds-col slds-size_1-of-1 slds-p-horizontal_medium">
+                                        <img src="/img/campaign/campaign_image.jpg" class="hero-image missingImage slds-align_absolute-center"/>
+                                    </div>
+                                    <div    class="slds-col slds-size_1-of-1">
+                                        <lightning-file-upload  class="slds-align_absolute-center"
+                                                                name="fileUploader"
+                                                                accept={acceptedFormats}
+                                                                record-id={recordId}
+                                                                onuploadfinished={handleUploadFinished}
+                                                                onclick={handleClick}>
+                                        </lightning-file-upload>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                    <template if:true={hasTagDescription}>
+                        <div class={tagDescriptionClass}>
+                                <!-- Description Display -->
+                                <template if:true={description}>
+                                     <div    class="slds-p-vertical_xx-small slds-col slds-size_1-of-1">
+                                        <lightning-formatted-rich-text value={description}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </template>
+
+                                <!-- Tags Display -->
+                                <template if:true={tags}>
+                                    <div    class="slds-p-vertical_xx-small slds-col slds-size_1-of-1">
+                                        <template for:each={tags} for:item="eachItem">
+                                            <lightning-badge    label={eachItem}
+                                                                key={eachItem}
+                                                                class="slds-p-bottom_xx-small">
+                                            </lightning-badge>
+                                        </template>
+                                    </div>
+                                </template>
+                        </div>
+                    </template>
+
+                    <!-- Error Display -->
+                    <template if:true={errorMessage}>
+                        <div class="slds-size_1-of-1 slds-col slds-media slds-media_center slds-m-vertical_x-small slds-p-horizontal_x-small">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="utility:error" size="x-small"
+                                                variant="error">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <lightning-formatted-text   value={errorMessage}    class="slds-text-color_error">
+                                </lightning-formatted-text>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Loading Spinner Display -->
+            <template if:false={isReady}>
+                <div style="min-height:150px;">
+                    <lightning-spinner alternative-text="Loading..." size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+        <!-- Debug info Display -->
+        <template if:true={isDebug}>
+            <div slot="footer">
+                <dl class="slds-dl_horizontal slds-text-align_left" style="word-break: break-word;">
+                    <dt class="slds-dl_horizontal__label slds-truncate">Fields:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">File ID: {fileField} / File URL: {urlField}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Object: {objectApiName} / ID: {recordId}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Content IDs:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Document: {contentDocumentId} / Last Version: {lastVersionId}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">URL:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{fileUrl}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">
+                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                                                    label="See Help on GitHub"
+                                                    target="_blank">
+                        </lightning-formatted-url>
+                    </dd>
+                </dl>
+            </div>
+        </template>
+
+     </lightning-card>
+    </div>
+
+</template>
