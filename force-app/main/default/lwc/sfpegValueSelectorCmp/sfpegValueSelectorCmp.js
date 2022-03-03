@@ -46,8 +46,8 @@ export default class SfpegValueSelectorCmp extends LightningElement {
     @api wrapperCss;                // CSS classes for the wrapping <div>
     @api headerTitle;               // Optional title displayed before the selector
     @api displayMode = 'picklist';  // Display mode for the Selector (path, progress, tabs, buttons, picklist, radio, tabsV)
-    @api recordField;               // Icon of the wrapping Card
-    @api userField;                 // Icon of the wrapping Card
+    @api recordField;               // API Name of the picklist field on the current record
+    @api userField;                 // API Name of the picklist field on the current user
     @api isDebug = false;           // Flag to activate debug mode
 
     //----------------------------------------------------------------

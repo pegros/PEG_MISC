@@ -1,0 +1,104 @@
+<template>
+    <div class={wrapperCss}>
+        <template if:true={isReady}>
+            <lightning-layout vertical-align="end" horizontal-align="spread">
+                <!-- alignment-bump="left"  no-shrink-->
+                <lightning-layout-item flexibility="auto"  >
+                    <lightning-formatted-text   value={headerTitle}
+                                                class="slds-text-heading_small slds-m-right_small slds-m-bottom_xx-small slds-line-clamp_x-small"
+                                                title={headerTitle}>
+                    </lightning-formatted-text>
+                </lightning-layout-item>
+                <template for:each={picklistInputs} for:item="eachItem">
+                    <!-- alignment-bump="right" -->
+                    <lightning-layout-item  key={eachItem.name} flexibility="auto, no-shrink" >
+                        <!-- disabled read-only variant="label-inline"-->
+                        <lightning-combobox name={eachItem.name}
+                                            label={eachItem.label}
+                                            value={eachItem.value}
+                                            class="slds-m-right_x-small"
+                                            read-only={isDisabled}
+                                            placeholder="---"
+                                            options={eachItem.pickValues}
+                                            onchange={handleChange} >
+                        </lightning-combobox>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item flexibility="auto, no-shrink" >
+                    <template if:false={isEditMode}>
+                        <lightning-button-icon  icon-name="utility:clear"
+                                                class="slds-m-right_xx-small slds-hidden" >
+                        </lightning-button-icon>
+                        <lightning-button-icon  icon-name="utility:edit"
+                                                alternative-text="Modify"
+                                                title="Modify"
+                                                onclick={toggleEditMode} >
+                        </lightning-button-icon>
+                    </template>
+                    <template if:true={isEditMode}>
+                        <lightning-button-icon  icon-name="utility:clear"
+                                                alternative-text="Undo"
+                                                title="Undo"
+                                                class="slds-m-right_xx-small"
+                                                onclick={toggleEditMode} >
+                        </lightning-button-icon>
+                        <lightning-button-icon  icon-name="utility:check"
+                                                alternative-text="Validate"
+                                                title="Validate"
+                                                variant="brand"
+                                                onclick={saveChanges} >
+                        </lightning-button-icon>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <!-- Error Message Display -->
+        <template if:true={errorMessage}>
+            <div class="slds-media slds-media_center slds-m-vertical_x-small slds-p-horizontal_x-small headerContainer">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:error" size="x-small"
+                                    variant="error">
+                    </lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <lightning-formatted-text   value={errorMessage}    class="slds-text-color_error">
+                    </lightning-formatted-text>
+                </div>
+            </div>
+        </template>
+
+        <!-- Loading Spinner Display -->
+        <template if:false={isReady}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner>
+        </template>
+
+        <!-- Update Spinner Display -->
+        <template if:true={isUpdating}>
+            <lightning-spinner alternative-text="Updating..." size="small">
+            </lightning-spinner>
+        </template>
+
+        <!-- Debug info Display -->
+        <template if:true={isDebug}>
+            <div class="slds-box slds-theme_default slds-text-color_default slds-m-top_small">
+                <dl class="slds-dl_horizontal slds-text-align_left">
+                    <dt class="slds-dl_horizontal__label slds-truncate">Multi-Value field:</dt>
+                    <dd class="slds-dl_horizontal__detail">{multiValueField}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Picklist Fields:</dt>
+                    <dd class="slds-dl_horizontal__detail">{picklistFields}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
+                    <dd class="slds-dl_horizontal__detail">Object: {objectApiName} / ID: {recordId}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                                                    label="See Help on GitHub"
+                                                    target="_blank">
+                    </lightning-formatted-url>
+                    </dd>
+                </dl>
+            </div>
+        </template>
+    </div>
+</template>

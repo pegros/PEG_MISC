@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Multi-Value Selector</masterLabel>
+
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property   name="headerTitle"
+                        label="Title"
+                        type="String" 
+                        description="Title (optional) displayed before the selector"/>
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_default"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="multiValueField"
+                        label="Multi-Value Field"
+                        type="String"
+                        description="API Name of the multi-picklist field providing the possible values."/>
+            <property   name="picklistFields"
+                        label="Picklist Fields"
+                        type="String"
+                        description="List of API Names of successive picklist fields to be set (stringified array)."/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="headerTitle"
+                        label="Title"
+                        type="String" 
+                        description="Title (optional) displayed before the selector"/>
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-box slds-theme_default"
+                        description="CSS Classes for the wrapping div"/>
+
+            <property   name="multiValueField"
+                        label="Multi-Value Field"
+                        type="String"
+                        description="API Name of the multi-picklist field providing the possible values."/>
+            <property   name="picklistFields"
+                        label="Picklist Fields"
+                        type="String"
+                        description="List of API Names of successive picklist fields to be set (stringified array)."/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!objectApiName}"
+                        description="API Name of Current Object."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!recordId}"
+                        description="ID of current Record"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
