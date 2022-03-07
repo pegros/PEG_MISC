@@ -38,8 +38,8 @@ conditional rendering in Lightning page).
 ![Value Selector in Buttons mode](/media/sfpegValueSelectorButtons.png)
 
 * **[sfpegMultiValueSelectorCmp](/help/sfpegMultiValueSelectorCmp.md)** enables to display
-and edit a set of picklist fields leveraging a same set of values provided by a
-multi-picklist field, each value being used max once.
+and edit a set of picklist fields on the current record leveraging a same set of values provided
+by a multi-picklist field, each value being used max once.
 
 ![Multi-Value Selector](/media/sfpegMultiValueSelector.png)
 

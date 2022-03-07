@@ -34,6 +34,10 @@ import { getObjectInfo }        from 'lightning/uiObjectInfoApi';
 import { getRecord }            from 'lightning/uiRecordApi';
 import { updateRecord }         from 'lightning/uiRecordApi';
 
+import EDIT_LABEL   from '@salesforce/label/c.sfpegMultiValueSelectorEditlLabel';
+import SAVE_LABEL   from '@salesforce/label/c.sfpegMultiValueSelectorSaveLabel';
+import CANCEL_LABEL from '@salesforce/label/c.sfpegMultiValueSelectorCancelLabel';
+
 export default class SfpegMultiValueSelectorCmp extends LightningElement {
 
     //----------------------------------------------------------------
@@ -60,6 +64,13 @@ export default class SfpegMultiValueSelectorCmp extends LightningElement {
     @track picklistValuesOrig;  // List of all possible values
     @track picklistInputs = []; // List of fieldInputs with available values and selected value
     @track errorMessage = null; // Error message
+
+    //----------------------------------------------------------------
+    // Custom Labels
+    //----------------------------------------------------------------
+    editLabel = EDIT_LABEL;
+    saveLabel = SAVE_LABEL;
+    cancelLabel = CANCEL_LABEL;
 
     //----------------------------------------------------------------
     // Custom Getters

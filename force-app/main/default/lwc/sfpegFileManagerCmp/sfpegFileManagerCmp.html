@@ -7,7 +7,7 @@
                         <!-- File Display -->
                         <template if:true={contentDocumentId}>
                             <div    onclick={showPreview} class="slds-p-horizontal_medium">
-                                <img src={fileUrl} class={imageClass} alt="Loading..."></img>
+                                <img src={fileUrl} class={imageClass} alt={loadlabel}></img>
                             </div>
                         </template>
 
@@ -76,7 +76,7 @@
             <!-- Loading Spinner Display -->
             <template if:false={isReady}>
                 <div style="min-height:150px;">
-                    <lightning-spinner alternative-text="Loading..." size="medium">
+                    <lightning-spinner alternative-text={loadlabel} size="medium">
                     </lightning-spinner>
                 </div>
             </template>
@@ -95,7 +95,7 @@
                     <dd class="slds-dl_horizontal__detail slds-wrap">{fileUrl}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail slds-wrap">
-                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                        <lightning-formatted-url    value="https://github.com/pegros/help/sfpegFileManagerCmp.md"
                                                     label="See Help on GitHub"
                                                     target="_blank">
                         </lightning-formatted-url>

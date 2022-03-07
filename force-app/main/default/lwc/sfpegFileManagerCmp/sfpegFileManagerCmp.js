@@ -37,6 +37,7 @@ import { getRecord }        from 'lightning/uiRecordApi';
 import { updateRecord }     from 'lightning/uiRecordApi';
 import { ShowToastEvent }   from 'lightning/platformShowToastEvent';
 
+import LOAD_LABEL from '@salesforce/label/c.sfpegFileManagerLoadLabel';
 
 export default class SfpegFileManagerCmp extends NavigationMixin(LightningElement) {
 
@@ -87,6 +88,11 @@ export default class SfpegFileManagerCmp extends NavigationMixin(LightningElemen
     @track description;         // Description fetched
     @track tags;                // Tags fetched
     @track errorMessage;        // Possible error message.
+
+    //----------------------------------------------------------------
+    // Custom Labels
+    //----------------------------------------------------------------
+    loadlabel = LOAD_LABEL;
 
     //----------------------------------------------------------------
     // Custom Getters
@@ -205,7 +211,7 @@ export default class SfpegFileManagerCmp extends NavigationMixin(LightningElemen
         }
         else if (error) {
             console.warn('wiredRecord: error raised ', JSON.stringify(error));
-            this.errorMessage = "Field value retrieval issue!";
+            this.errorMessage = "Record Data retrieval issue!";
             this.isReady = true;
         }
         else {

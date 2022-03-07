@@ -161,13 +161,13 @@
 
         <!-- Loading Spinner Display -->
         <template if:false={isReady}>
-            <lightning-spinner alternative-text="Loading..." size="medium">
+            <lightning-spinner alternative-text={loadLabel} size="medium">
             </lightning-spinner>
         </template>
 
         <!-- Update Spinner Display -->
         <template if:true={isUpdating}>
-            <lightning-spinner alternative-text="Updating..." size="small">
+            <lightning-spinner alternative-text={updateLabel} size="small">
             </lightning-spinner>
         </template>
 
@@ -185,7 +185,7 @@
                     <dd class="slds-dl_horizontal__detail">Value: {selectedOption} / Label: {selectedLabel}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail">
-                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                        <lightning-formatted-url    value="https://github.com/pegros/help/sfpegValueSelectorCmp.md"
                                                     label="See Help on GitHub"
                                                     target="_blank">
                         </lightning-formatted-url>

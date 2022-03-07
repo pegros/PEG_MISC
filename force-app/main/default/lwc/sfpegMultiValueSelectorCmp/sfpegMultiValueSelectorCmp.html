@@ -30,21 +30,21 @@
                                                 class="slds-m-right_xx-small slds-hidden" >
                         </lightning-button-icon>
                         <lightning-button-icon  icon-name="utility:edit"
-                                                alternative-text="Modify"
-                                                title="Modify"
+                                                alternative-text={editLabel}
+                                                title={editLabel}
                                                 onclick={toggleEditMode} >
                         </lightning-button-icon>
                     </template>
                     <template if:true={isEditMode}>
                         <lightning-button-icon  icon-name="utility:clear"
-                                                alternative-text="Undo"
-                                                title="Undo"
+                                                alternative-text={cancelLabel}
+                                                title={cancelLabel}
                                                 class="slds-m-right_xx-small"
                                                 onclick={toggleEditMode} >
                         </lightning-button-icon>
                         <lightning-button-icon  icon-name="utility:check"
-                                                alternative-text="Validate"
-                                                title="Validate"
+                                                alternative-text={saveLabel}
+                                                title={saveLabel}
                                                 variant="brand"
                                                 onclick={saveChanges} >
                         </lightning-button-icon>
@@ -92,7 +92,7 @@
                     <dd class="slds-dl_horizontal__detail">Object: {objectApiName} / ID: {recordId}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail">
-                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                        <lightning-formatted-url    value="https://github.com/pegros/help/sfpegMultiValueSelectorCmp.md"
                                                     label="See Help on GitHub"
                                                     target="_blank">
                     </lightning-formatted-url>

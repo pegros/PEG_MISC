@@ -38,6 +38,9 @@ import { getPicklistValues }    from 'lightning/uiObjectInfoApi';
 import { getObjectInfo }        from 'lightning/uiObjectInfoApi';
 import { updateRecord }         from 'lightning/uiRecordApi';*/
 
+import LOAD_LABEL   from '@salesforce/label/c.sfpegValueSelectorLoadLabel';
+import UPDATE_LABEL from '@salesforce/label/c.sfpegValueSelectorUpdateLabel';
+
 export default class SfpegValueSelectorCmp extends LightningElement {
 
     //----------------------------------------------------------------
@@ -76,6 +79,12 @@ export default class SfpegValueSelectorCmp extends LightningElement {
     @track selectedLabel;       // Current active selection label
 
     @track errorMessage;        // Error Message Display
+
+    //----------------------------------------------------------------
+    // Custom Labels
+    //----------------------------------------------------------------
+    loadLabel = LOAD_LABEL;
+    updateLabel = UPDATE_LABEL;
 
     //----------------------------------------------------------------
     // Custom getters

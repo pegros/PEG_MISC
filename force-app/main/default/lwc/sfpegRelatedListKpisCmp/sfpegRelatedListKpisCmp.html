@@ -62,13 +62,13 @@
 
         <!-- Init Spinner Display -->
         <template if:false={isReady}>
-            <lightning-spinner alternative-text="Initializing..." size="medium">
+            <lightning-spinner alternative-text={initLabel} size="medium">
             </lightning-spinner>
         </template>
 
         <!-- Loading Spinner Display -->
         <template if:true={isLoading}>
-            <lightning-spinner alternative-text="Loading..." size="medium">
+            <lightning-spinner alternative-text={loadLabel} size="medium">
             </lightning-spinner>
         </template>
 
@@ -92,7 +92,7 @@
                     <dd class="slds-dl_horizontal__detail">{marginClass}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail">
-                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC"
+                        <lightning-formatted-url    value="https://github.com/pegros/help/sfpegRelatedListKpisCmp.md"
                                                     label="See Help on GitHub"
                                                     target="_blank">
                         </lightning-formatted-url>

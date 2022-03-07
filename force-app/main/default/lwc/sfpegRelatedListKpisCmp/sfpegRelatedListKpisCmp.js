@@ -38,6 +38,9 @@ import LOCALE   from '@salesforce/i18n/locale';
 import CURRENCY from '@salesforce/i18n/currency';
 //import NUMBER   from '@salesforce/i18n/number.numberFormat';
 
+import INIT_LABEL from '@salesforce/label/c.sfpegRelatedListKpisInitLabel';
+import LOAD_LABEL   from '@salesforce/label/c.sfpegRelatedListKpisLoadLabel';
+
 export default class SfpegRelatedListKpisCmp extends NavigationMixin(LightningElement) {
 
     //----------------------------------------------------------------
@@ -104,6 +107,12 @@ export default class SfpegRelatedListKpisCmp extends NavigationMixin(LightningEl
         style: 'currency'//,
         //maximumSignificantDigits: 2
     });
+
+    //----------------------------------------------------------------
+    // Custom Labels
+    //----------------------------------------------------------------
+    initLabel = INIT_LABEL;
+    loadLabel = LOAD_LABEL;
 
     //----------------------------------------------------------------
     // Custom Getters
