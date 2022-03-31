@@ -122,6 +122,7 @@ export default class SfpegMultiValueSelectorCmp extends LightningElement {
             if (this.isDebug) console.log('wiredRecord: data received ', JSON.stringify(data));
 
             //this.picklistValues = this.getFieldValue(data.fields,this.multiValueField);
+            this.picklistValues = [];
             this.picklistValues.push({label:"---",value:null});
             let picklistValues = this.getFieldValue(data.fields,this.multiValueField);
             let refValues = picklistValues.value.split(';');
