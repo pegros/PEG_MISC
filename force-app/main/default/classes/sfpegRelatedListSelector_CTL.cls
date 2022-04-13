@@ -40,7 +40,8 @@ global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.Dyna
         'OpenActivity' => 'Events',
         'TopicAssignment' => 'Topic',
         'EmailMessage' => 'Email',
-        'ActionPlan' => 'Entitlement'
+        'ActionPlan' => 'Entitlement',
+        'CampaignMember' => 'Campaign' //campaign_members
     };
     static Map<String,String> standardCustomObjectMap = new Map<String,String>{
         'BranchUnitRelatedRecord' => 'Custom16'

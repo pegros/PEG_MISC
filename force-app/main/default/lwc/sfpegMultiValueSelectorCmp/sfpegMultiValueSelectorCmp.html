@@ -17,6 +17,7 @@
                                             label={eachItem.label}
                                             value={eachItem.value}
                                             class="slds-m-right_x-small"
+                                            field-level-help={eachItem.help}
                                             read-only={isDisabled}
                                             placeholder="---"
                                             options={eachItem.pickValues}
@@ -32,6 +33,7 @@
                         <lightning-button-icon  icon-name="utility:edit"
                                                 alternative-text={editLabel}
                                                 title={editLabel}
+                                                variant="brand"
                                                 onclick={toggleEditMode} >
                         </lightning-button-icon>
                     </template>

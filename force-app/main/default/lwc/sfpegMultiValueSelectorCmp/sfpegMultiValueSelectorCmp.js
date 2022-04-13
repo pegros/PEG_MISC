@@ -105,6 +105,7 @@ export default class SfpegMultiValueSelectorCmp extends LightningElement {
             if (this.isDebug) console.log('wiredObject: data ', JSON.stringify(data));
             this.picklistInputs.forEach(item => {
                 item.label = data.fields[item.name]?.label || "Undefined";
+                item.help = data.fields[item.name]?.inlineHelpText;
             });            
             if (this.isDebug) console.log('wiredRecord: picklistInputs registered ', JSON.stringify(this.picklistInputs));
         }
