@@ -39,6 +39,6 @@ component, e.g. `Parent.CampaignImageId` to display the file registered on a par
 
 ## Technical Details
 
-The  **sfpegRelatedListKpisCmp** has no Apex class dependency and entirely relied relies on
+The  **sfpegRelatedListKpisCmp** has no Apex class dependency and entirely relies on
 * the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech/set field values for the current record.
 * the standard **[lightning-file-upload](https://developer.salesforce.com/docs/component-library/bundle/lightning-file-upload/documentation)** base component to upload the files.

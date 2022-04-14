@@ -1,0 +1,74 @@
+<template>
+
+    <!-- Main Component Display -->
+    <template if:true={isReady}>
+        <div class={wrapperCss}>
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__figure">
+                    <template if:true={imageUrl}>
+                        <div class="slds-p-right_x-small">
+                            <img src={imageUrl} class={imageClass} alt={imageDesc}></img>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-media__body">
+                    <lightning-record-view-form object-api-name={objectApiName}
+                                                record-id={recordId}
+                                                onload={handleLoad} >
+                        <div class="slds-p-bottom_x-small">
+                            <lightning-output-field field-name={titleField}
+                                                    field-class="slds-text-heading_small"
+                                                    variant="label-hidden">
+                            </lightning-output-field>
+                        </div>
+                        <template for:each={detailFields} for:item="iter">
+                            <lightning-output-field key={iter} field-name={iter} variant={fieldVariant} >
+                            </lightning-output-field>
+                        </template>
+                        <div class="slds-hide">
+                            <lightning-output-field data-my-id="imageField"
+                                                    field-name={imageField} >
+                            </lightning-output-field>
+                        </div>
+                    </lightning-record-view-form>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Error Display -->
+    <template if:true={errorMessage}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-vertical_small">
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:warning" size="small" variant="warning"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <lightning-formatted-text value={errorMessage}></lightning-formatted-text>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Debug Display -->
+    <template if:true={isDebug}>
+        <div class="slds-box slds-box_small slds-theme_default slds-m-vertical_small">
+            <dl class="slds-dl_horizontal slds-text-align_left" style="word-break: break-word;">
+                <dt class="slds-dl_horizontal__label slds-truncate">Fields:</dt>
+                <dd class="slds-dl_horizontal__detail slds-wrap">{fieldSet} --> {titleField} + {detailList}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Image:</dt>
+                <dd class="slds-dl_horizontal__detail slds-wrap">{imageField} --> {imageUrl}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Layout:</dt>
+                <dd class="slds-dl_horizontal__detail slds-wrap">Fields: {fieldVariant} / Image: {imageClass}</dd>
+                
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegMediaTileCmp.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+</template>

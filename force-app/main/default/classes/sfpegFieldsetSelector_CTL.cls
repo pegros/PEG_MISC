@@ -1,9 +1,9 @@
 /***
-* @description  Lightning controller to list all picklist fields of the current Object.
+* @description  Lightning controller to list all fieldsets available for the current Object.
 *               It is meant to be used in 'datasource' properties of LWC component field configuration
 *               Part of the PEG_MISC package.
 * @author       P-E GROS
-* @date         Jan 2022
+* @date         April 2022
 *
 * Legal Notice
 * 
@@ -30,7 +30,7 @@
 * SOFTWARE.
 ***/
 
-global with sharing class sfpegPicklistRecordSelector_CTL extends VisualEditor.DynamicPickList {
+global with sharing class sfpegFieldsetSelector_CTL extends VisualEditor.DynamicPickList {
     
     /***
     * @description Context of the Lightning page calling the picklist controller.
@@ -44,7 +44,7 @@ global with sharing class sfpegPicklistRecordSelector_CTL extends VisualEditor.D
     * @exception   none really specific.
     ***/    
 
-    global sfpegPicklistRecordSelector_CTL(VisualEditor.DesignTimePageContext pageContext) {
+    global sfpegFieldsetSelector_CTL(VisualEditor.DesignTimePageContext pageContext) {
         System.debug(LoggingLevel.FINEST,'Constructor: START with page context ' + pageContext);
         System.debug(LoggingLevel.FINEST,'Constructor: entityName ' + pageContext.entityName);
         this.pageContext = pageContext;
@@ -78,30 +78,21 @@ global with sharing class sfpegPicklistRecordSelector_CTL extends VisualEditor.D
         System.debug(LoggingLevel.FINEST,'getValues: entity name fetched ' + pageContext.entityName);
         Schema.SObjectType entityDesc = Schema.getGlobalDescribe().get(pageContext.entityName);
         System.debug(LoggingLevel.FINEST,'getValues: entityDesc fetched ' + entityDesc);
-        Map<String,Schema.SObjectField> entityFields = entityDesc.getDescribe().fields.getMap();
-        System.debug(LoggingLevel.FINEST,'getValues: entityFields fetched ' + entityFields);
+        Map<String, Schema.FieldSet> entityFS = entityDesc.getDescribe().fieldSets.getMap();
+        System.debug(LoggingLevel.FINEST,'getValues: entityFS fetched ' + entityFS);
 
-        for (String fieldName : entityFields.keySet()){
-            System.debug(LoggingLevel.FINEST,'getValues: processing fieldName ' + fieldName);
-            DescribeFieldResult fieldDesc = entityFields.get(fieldName).getDescribe();
-            //System.debug(LoggingLevel.FINEST,'getValues: field desc ' + fieldDesc);
-            System.debug(LoggingLevel.FINEST,'getValues: field type '  + fieldDesc.getType());
-            switch on (fieldDesc.getType()) {
-                when Picklist {
-                    System.debug(LoggingLevel.FINE,'getValues: registering picklist field ' + fieldName);
-                    System.debug(LoggingLevel.FINEST,'getValues: field label ' + fieldDesc.getLabel());
-                    System.debug(LoggingLevel.FINEST,'getValues: field local name ' + fieldDesc.getLocalName());
-                    System.debug(LoggingLevel.FINEST,'getValues: field name ' + fieldDesc.getName());
-                    picklistValues.addRow(new VisualEditor.DataRow(
-                        fieldDesc.getLabel(),
-                        pageContext.entityName + '.' + fieldDesc.getName()));
-                }
-                when else {
-                    System.debug(LoggingLevel.FINE,'getValues: ignoring non picklist field ' + fieldName);
-                }
-            }
+        for (String fsName : entityFS.keySet()){
+            System.debug(LoggingLevel.FINEST,'getValues: registering fieldSet ' + fsName);
+            Schema.FieldSet fsDesc = entityFS.get(fsName);
+            System.debug(LoggingLevel.FINEST,'getValues: fieldSet label ' + fsDesc.getLabel());
+            System.debug(LoggingLevel.FINEST,'getValues: fieldSet name ' + fsDesc.getName());
+            picklistValues.addRow(new VisualEditor.DataRow(
+                fsDesc.getLabel(),
+                pageContext.entityName + '.' + fsDesc.getName()));
         }
         System.debug(LoggingLevel.FINEST,'getValues: END returning ' + picklistValues);
         return picklistValues;
     }
 }
+
+

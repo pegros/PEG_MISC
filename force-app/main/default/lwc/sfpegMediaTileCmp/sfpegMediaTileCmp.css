@@ -1,0 +1,20 @@
+.image-x-small {
+    max-width: var(--lwc-sizeXxSmall); /* 75px;*/
+    max-height: var(--lwc-sizeXxSmall); /* 75px;*/
+}
+.image-small {
+    max-width: var(--lwc-sizeXSmall); /*100px;*/
+    max-height: var(--lwc-sizeXSmall); /* 100px;*/
+}
+.image-medium {
+    max-width: var(--lwc-sizeSmall); /*200px;*/
+    max-height: var(--lwc-sizeSmall); /* 200px;*/
+}
+.image-large {
+    max-width:  var(--lwc-sizeMedium); /* 300px */
+    max-height: var(--lwc-sizeMedium); /* 300px;*/
+}
+.image-x-large {
+    max-width:  var(--lwc-sizeLarge);
+    max-height: var(--lwc-sizeLarge); 
+}
