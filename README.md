@@ -64,3 +64,6 @@ technical implementation principles) is available in their dedicated pages.
 
 Each App Builder component is independent may be deployed on a standalone basis, as soon as each
 dependencies are deployed as well (usually a few Apex classes).
+
+**Important**: for the time being, test classes are still missing for Apex code! They should be 
+coming any time soon to support deployment on production orgs.
