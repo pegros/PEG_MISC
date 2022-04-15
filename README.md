@@ -49,6 +49,12 @@ an additional text description and multi-value field value (as badges).
 
 ![File Manager](/media/sfpegFileManager.png) 
 
+* **[sfpegMediaTileCmp](/help/sfpegMediaTileCmp.md)** enables to display a graphical summary tile
+of the current record (from a fieldset and a formula field providing the download URL of 
+an an image file).
+
+![Media Tile Base Display](/media/sfpegMediaTile.png)
+
 
 Detailed information about these components (behaviour, configuration guidelines,
 technical implementation principles) is available in their dedicated pages.
