@@ -1,0 +1,18 @@
+/* Override required because of CSS behaviour of cards in subtabs */
+.slds-theme_info {
+    background-color : var(--lwc-colorBackgroundToast,rgb(112, 110, 107)) !important;
+}
+.slds-theme_success {
+    background-color : var(--lwc-colorBackgroundToastSuccess,rgb(4, 132, 75)) !important;
+}
+.slds-theme_warning {
+    padding-top: 0px !important;
+    background-color : var(--lwc-colorBackgroundToastWarning,rgb(255, 158, 44)) !important;
+}
+.slds-theme_error {
+    padding-top: 0px !important;
+    background-color : var(--lwc-colorBackgroundToastError,rgb(194, 57, 52)) !important;
+}
+.slds-p-around_x-small {
+    padding: var(--lwc-spacingXSmall,0.5rem) !important;
+}

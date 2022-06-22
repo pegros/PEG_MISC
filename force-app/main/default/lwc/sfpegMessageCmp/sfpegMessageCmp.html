@@ -1,0 +1,45 @@
+<template>
+    <div class={divClass}>
+        <div class="slds-media slds-media_center" style="width:100%;">
+            <template if:true={configuration.iconName}>
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name={configuration.iconName}
+                                    alternative-text="Message Icon"
+                                    variant={configuration.iconVariant}
+                                    size="small" >
+                    </lightning-icon>
+                </div>
+            </template>
+            <div class={configuration.textVariant}>
+                <template if:true={title}>
+                    <h2 class="slds-text-heading_small" style="word-wrap: break-word !important;">
+                        <lightning-formatted-text value={title} >
+                        </lightning-formatted-text>
+                    </h2>
+                </template>
+                <template if:true={message}>
+                    <p class="slds-text-body_regular">
+                        <lightning-formatted-rich-text value={message} >
+                        </lightning-formatted-rich-text>
+                    </p>
+                </template>
+                <template if:true={recordMessage}>
+                    <p class="slds-text-body_regular">
+                        <lightning-formatted-rich-text value={recordMessage} >
+                        </lightning-formatted-rich-text>
+                    </p>
+                </template>
+            </div>
+            <template if:true={isDebug}>
+                <div class="slds-media__figure slds-media__figure_reverse">
+                    <lightning-button-icon  icon-name="utility:help"
+                                            alternative-text="Online Help"
+                                            variant="brand"
+                                            size="small" >
+                    </lightning-button-icon>
+                </div>
+            </template>
+        </div>
+    </div>
+
+</template>

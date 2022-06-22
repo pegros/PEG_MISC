@@ -45,12 +45,14 @@
                                 <!-- Tags Display -->
                                 <template if:true={tags}>
                                     <div    class="slds-p-vertical_xx-small slds-col slds-size_1-of-1 slds-align_absolute-center">
-                                        <template for:each={tags} for:item="eachItem">
-                                            <lightning-badge    label={eachItem}
-                                                                key={eachItem}
-                                                                class="slds-badge_inverse slds-p-bottom_xx-small">
-                                            </lightning-badge>
-                                        </template>
+                                        <div class="slds-grid slds-wrap">
+                                            <template for:each={tags} for:item="eachItem">
+                                                <lightning-badge    label={eachItem}
+                                                                    key={eachItem}
+                                                                    class="slds-badge_inverse slds-m-vertical_xx-small">
+                                                </lightning-badge>
+                                            </template>
+                                        </div>
                                     </div>
                                 </template>
                         </div>

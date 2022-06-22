@@ -98,7 +98,7 @@ public with sharing class sfpegRelatedListKpis_CTL {
             System.debug(LoggingLevel.FINE,'getCounts: recordData fetched ' + recordData);
 
             Map<String, Object> fieldsToValue = recordData.getPopulatedFieldsAsMap();
-            System.debug(LoggingLevel.FINE,'getCounts: recordData fetched ' + recordData);
+            System.debug(LoggingLevel.FINE,'getCounts: fieldsToValue mapped ' + fieldsToValue);
 
             for (String iterField : fieldsToValue.keySet()) {
                 if ((iterField != 'Id') && (iterField != 'RecordTypeId')) {
@@ -107,13 +107,20 @@ public with sharing class sfpegRelatedListKpis_CTL {
                     Map<String,Object> iterFieldVal = new Map<String,Object>{
                         'count' => relatedList.size()
                     };
+                    System.debug(LoggingLevel.FINE,'getCounts: count set ' + relatedList.size());
                     if (sumMap.containsKey(iterField)) {
                         String sumField = sumMap.get(iterField);
                         System.debug(LoggingLevel.FINE,'getCounts: summing field ' + sumField);
                         Double iterFieldSum = 0;
                         for (Object iterRcd : relatedList) {
                             SObject iterObj = (SObject) iterRcd;
-                            iterFieldSum += (Double) (iterObj.get(sumField));
+                            System.debug(LoggingLevel.FINE,'getCounts: processing iterObj ' + iterObj.Id);
+                            Double iterValue = (Double) (iterObj.get(sumField));
+                            System.debug(LoggingLevel.FINE,'getCounts: sumfield value ' + iterValue);
+                            if (iterValue != null) {
+                                iterFieldSum += iterValue;
+                                System.debug(LoggingLevel.FINE,'getCounts: sum increased ' + iterFieldSum);
+                            }
                         }
                         System.debug(LoggingLevel.FINE,'getCounts: summing done ' + iterFieldSum);
                         iterFieldVal.put('sum',iterFieldSum);
