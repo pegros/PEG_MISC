@@ -55,6 +55,10 @@ an an image file).
 
 ![Media Tile Base Display](/media/sfpegMediaTile.png)
 
+* **[sfpegMediaPlayCmp](/help/sfpegMediaPlayCmp.md)** enables to display in a record page a media
+file (ContentDocument of video, audio or image type) referenced on the current record.
+
+![Media Player](/media/sfpegMediaPlayer.png) 
 
 Detailed information about these components (behaviour, configuration guidelines,
 technical implementation principles) is available in their dedicated pages.
