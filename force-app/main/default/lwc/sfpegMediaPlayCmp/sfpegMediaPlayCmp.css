@@ -1,0 +1,27 @@
+.fileVideo {
+    width: 100%;
+    height:auto;
+    max-height:50vh;
+}
+.fileAudio {
+    width: 100%;
+}
+.fileImage {
+    cursor: pointer !important; 
+    max-width: 100%;
+    /*max-height: var(--lwc-sizeSmall); /*200px;*/
+    max-height: 75vh;
+}
+.fileImage-border {
+    border: 2px solid;
+    border-color: var(--lwc-colorBorder);
+}
+.msgContainer {
+    word-wrap: break-word !important;
+}
+.debugItem {
+    word-wrap: break-word !important;
+}
+.spinnerContainer {
+    min-height: 100px;
+}

@@ -29,9 +29,9 @@ download URL being also possibly stored on another field).
 
 ## Configuration
 
-All the configuration of the **sfpegRelatedListKpisCmp** component is done in the App Builder.
+All the configuration of the **sfpegFileManagerCmp** component is done in the App Builder.
 
-![Related List KPIs configuration](/media/sfpegFileManagerConfig.png)
+![File Manager configuration](/media/sfpegFileManagerConfig.png)
 
 Lookup relations may be used when providing the API names of the fields configurable in the
 component, e.g. `Parent.CampaignImageId` to display the file registered on a parent Campaign.
@@ -39,6 +39,6 @@ component, e.g. `Parent.CampaignImageId` to display the file registered on a par
 
 ## Technical Details
 
-The  **sfpegRelatedListKpisCmp** has no Apex class dependency and entirely relies on
+The  **sfpegFileManagerCmp** has no Apex class dependency and entirely relies on
 * the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech/set field values for the current record.
 * the standard **[lightning-file-upload](https://developer.salesforce.com/docs/component-library/bundle/lightning-file-upload/documentation)** base component to upload the files.

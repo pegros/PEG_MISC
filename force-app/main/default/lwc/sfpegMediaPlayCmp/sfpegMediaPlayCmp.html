@@ -1,0 +1,128 @@
+<template>
+    <div class={wrapperCss}>
+        <lightning-card title={cardTitle} icon-name={cardIcon} class={cardClass}>
+
+            <!-- Card Header Actions Elements -->
+            <lightning-helptext     if:true={helpText}
+                                    slot="actions"
+                                    class="slds-m-top_small"
+                                    content={helpText}></lightning-helptext>
+            <template if:true={showRefresh}>
+                    <lightning-button-icon  if:true={fileId}
+                                        slot="actions"
+                                        size="small"
+                                        class="slds-m-left_xx-small"
+                                        icon-name="utility:refresh"
+                                        alternative-text={refreshLabel}
+                                        title={refreshLabel}
+                                        onclick={refreshFile}></lightning-button-icon>
+                    <lightning-button-icon  if:false={fileId}
+                                        slot="actions"
+                                        disabled
+                                        size="small"
+                                        class="slds-m-left_xx-small"
+                                        icon-name="utility:refresh"
+                                        alternative-text={refreshLabel}
+                                        title={refreshLabel}></lightning-button-icon>
+                </template>
+            <!-- Card Content Elements -->
+            <template if:true={isReady}>
+                <!-- slds-p-around_x-small-->
+                <div class={contentClass}>
+
+                    <!-- Error Message Display -->
+                    <template if:true={errorMsg}>
+                        <!-- slds-p-around_x-small -->
+                        <div class="">
+                            <div class="slds-media slds-media_center">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:error" size="small"
+                                                    variant="error">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-color_error msgContainer">{errorMsg}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- File Description Display -->
+                    <template if:true={showDetails}>
+                        <!-- slds-p-horizontal_small -->
+                        <div class="slds-m-bottom_small msgContainer">
+                            <!--<p class="slds-text-title_bold">{fileTitle}</p>-->
+                            <p class="slds-text-body_small">{fileDescription}</p>
+                        </div>
+                    </template>
+
+                    <!-- File Content Display -->
+                    <template if:true={isVideo} >
+                        <!-- autoplay="false class={fileVideo} style="width: 100%; height:auto; max-height:50vh;" slds-p-horizontal_small-->
+                        <div class="slds-align_absolute-center">
+                            <video  controls="controls"
+                                    name="media"
+                                    style="width: 100%; height:auto; max-height:50vh;"
+                                    title={fileTitle}
+                                    src={fileUrl} ></video>
+                        </div>
+                    </template>
+                    <template if:true={isAudio} >
+                        <!-- autoplay="false style="width: 100%;" class={fileAudio} slds-p-horizontal_small -->
+                        <div class="slds-align_absolute-center" >
+                            <audio  controls="controls"
+                                    name="media"
+                                    style="width: 100%;"
+                                    title={fileTitle}>
+                                <source src={fileUrl}></source></audio>
+                        </div>
+                    </template>
+                    <template if:true={isImage}>
+                        <!-- slds-p-horizontal_small -->
+                        <div class="slds-align_absolute-center">
+                            <img    src={fileUrl}
+                                    class={imageClass}
+                                    alt={fileTitle}
+                                    title={fileTitle}
+                                    onclick={showPreview}></img>
+                        </div>
+                    </template>
+                    
+                </div>
+            </template>
+
+            <!-- Loading Spinner Display -->
+            <template if:false={isReady}>
+                <div class="slds-p-around_x-small spinnerContainer" >
+                    <lightning-spinner alternative-text="loading..." size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Debug Information Display -->
+            <template if:true={isDebug}>
+                <div slot="footer" class="slds-text-align_left" >
+                    <dl class="slds-dl_horizontal slds-text-align_left">
+                        <dt class="slds-dl_horizontal__label slds-truncate">File Field</dt>
+                        <dd class="slds-dl_horizontal__detail">{fileField}</dd>
+                        <dt class="slds-dl_horizontal__label slds-truncate">File ID</dt>
+                        <dd class="slds-dl_horizontal__detail">{fileId}</dd>
+                        <dt class="slds-dl_horizontal__label slds-truncate">Last Version ID</dt>
+                        <dd class="slds-dl_horizontal__detail">{lastVersionId}</dd>
+                        <dt class="slds-dl_horizontal__label slds-truncate">File Infos</dt>
+                        <dd class="slds-dl_horizontal__detail debugItem">{fileDetails}</dd>
+                        <dt class="slds-dl_horizontal__label slds-truncate">Wrapping CSS</dt>
+                        <dd class="slds-dl_horizontal__detail debugItem">{wrapperCss}</dd>
+                        <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                        <dd class="slds-dl_horizontal__detail">
+                            <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegMediaPlayCmp.md"
+                                                        label="See Help on GitHub"
+                                                        target="_blank">
+                            </lightning-formatted-url>
+                        </dd>
+                    </dl>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>
