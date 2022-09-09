@@ -21,7 +21,6 @@ set when configuring the components within Experience Cloud pages.
 As much attention as possible has been paid to internationalisation requirements (at least languages),
 leveraging standard mechanisms to translate labels, field names, picklist values...
 
-
 ## Package Content
 
 This package provides a set of App/Community Builder components:
