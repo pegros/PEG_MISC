@@ -1,0 +1,40 @@
+<design:component label="SFPEG Chatter Group Selector" >
+        <design:supportedFormFactors>
+                <design:supportedFormFactor type="Large"/>
+                <design:supportedFormFactor type="Small"/>
+        </design:supportedFormFactors>
+
+        <design:attribute	name="title"
+							label="Component Card Title" />
+        <design:attribute	name="icon"
+							label="Component Card Icon" 
+							description="e.g. standard:feed, see SLDS icons"/>
+		<design:attribute name="showBorder"
+							label="Show Component Card Border?" />	
+		  
+        <design:attribute	name="groups"
+							label="Groups" 
+							description="JSON list of group names (may contain USR or RCD tokens for contextualisation)"/>
+
+		<design:attribute	name="showPublisher"
+							label="Show Chatter Publisher?" />
+        <design:attribute	name="feedDesign"
+							label="Feed Display Mode"
+							datasource="DEFAULT,BROWSE"
+							default="BROWSE"  />
+        <design:attribute	name="feedHeight"
+							label="Feed Height Limit" 
+							datasource=",small,medium,large"
+							default=""/>
+
+		<design:attribute	name="isDebug"
+							label="Show Debug?" 
+							default="false"/>
+
+        <design:attribute	name="sObjectName"
+							label="Object Name (Exp. Cloud)" 
+							description="Object API Name of the current record (if any, for Experience Cloud Sites)"/>
+        <design:attribute	name="recordId"
+							label="Record ID (Exp. Cloud)" 
+							description="ID of the current record (if any, for Experience Cloud Sites)"/>
+</design:component>

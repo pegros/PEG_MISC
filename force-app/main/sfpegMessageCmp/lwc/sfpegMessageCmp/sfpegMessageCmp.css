@@ -16,3 +16,6 @@
 .slds-p-around_x-small {
     padding: var(--lwc-spacingXSmall,0.5rem) !important;
 }
+.onlineHelp {
+    display: inline-block;
+}

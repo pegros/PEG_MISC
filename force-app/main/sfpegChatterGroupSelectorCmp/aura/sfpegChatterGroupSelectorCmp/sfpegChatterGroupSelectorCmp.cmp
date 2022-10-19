@@ -1,0 +1,157 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName"
+                access="global"
+                description="LWC Component to display the Feed of a Chatter Group selected in a configurable (and contextualisable) Name list."
+                controller="sfpegChatterGroup_CTL" >
+
+    <!-- Global component configuration -->
+    <aura:attribute name="title"    type="String"
+                    access="global" 
+                    description="Card title (supports custom labels)." />
+    <aura:attribute name="icon"     type="String"
+                    access="global" 
+                    description="Card icon name." />
+    <aura:attribute name="showBorder"   type="Boolean"
+                    access="global" 
+                    description="Flag to activate card border." />
+
+    <aura:attribute name="groups"   type="String"
+                    access="global" 
+                    description="List of group names to display (may include USR or RCD merge tokens)." />
+
+    <aura:attribute name="showPublisher"    type="Boolean"
+                    access="global" 
+                    description="Display Chatter publisher." />
+    <aura:attribute name="feedDesign"   type="String"
+                    access="global"     default="BROWSE"
+                    description="Displays overview or full details of each feed." />
+    <aura:attribute name="feedHeight"   type="String"
+                    access="global"     default=""
+                    description="Height of the feed (empty = no scroll)."/>
+
+    <aura:attribute name="isDebug"  type="Boolean"
+                    access="global" 
+                    description="Flag to show Debug Information" />
+
+    <!-- Technical Internal Properties -->
+    <aura:attribute name="message"      type="String"
+                    access="private" 
+                    description="Component message." />
+    <aura:attribute name="groupList"    type="List"
+                    access="private" 
+                    description="List of group data (ID + Name)." />
+    <aura:attribute name="selectGroup"  type="Object"
+                    access="private" 
+                    description="Selected Group." />
+
+     <!-- Component initialisation -->
+    <aura:handler   name="init"     value="{!this}"
+                    action="{!c.doInit}"
+                    description="Component initialisation." />
+
+    <!-- Component Content -->
+     <lightning:card    title="{!v.title + (v.selectGroup.Name ? ' - ' + v.selectGroup.Name : '')}"
+                        iconName="{#v.icon}"
+                        class="{#v.showBorder ? 'slds-card_boundary' : ''}" >
+
+        <aura:set attribute="actions">
+            <lightning:buttonGroup class="slds-col">
+                <aura:if isTrue="{!v.groupList.length > 1}">
+                    <lightning:buttonMenu   value="{!v.selectGroup}" 
+                                            onselect="{! c.selectChange }"
+                                            menuAlignment="right"
+                                            title="{!$Label.c.sfpegChatterGroupSelectorSelectAction}"
+                                            alternativeText="{!$Label.c.sfpegChatterGroupSelectorSelectAction}">
+                        <aura:iteration     items="{!v.groupList}" 
+                                            var="groupItem">
+                            <lightning:menuItem value="{!groupItem}"
+                                                label="{!groupItem.Name}"
+                                                title="{!groupItem.Id}" >
+                            </lightning:menuItem>
+                        </aura:iteration>
+                    </lightning:buttonMenu>
+                </aura:if>
+
+                <aura:if isTrue="{!v.selectGroup}">
+                    <lightning:buttonIcon   iconName="utility:open" 
+                                            alternativeText="Open Group"
+                                            title="{!$Label.c.sfpegChatterGroupSelectorOpenAction}"
+                                            onclick="{! c.openGroup }">
+                    </lightning:buttonIcon>
+                </aura:if>
+            </lightning:buttonGroup>
+        </aura:set>
+
+        <div class="">
+
+            <aura:if isTrue="{!v.selectGroup}">
+                <aura:if isTrue="{#v.showPublisher}">
+                    <div class="slds-m-around_small" aura:id="publisherDiv">
+                        <forceChatter:publisher context="RECORD"
+                                                recordId="{!v.selectGroup.Id}">
+                        </forceChatter:publisher>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{#v.feedHeight}">
+                    <ui:scrollerWrapper class="{#v.feedHeight}">
+                        <div aura:id="feedDiv" >
+                            <forceChatter:feed  type="Record"
+                                                aura:id="chatterFeed"
+                                                feedDesign="{#v.feedDesign}"
+                                                subjectId="{!v.selectGroup.Id}">
+                            </forceChatter:feed>
+                        </div>
+                    </ui:scrollerWrapper>
+                <aura:set attribute="else">
+                    <div aura:id="feedDiv" >
+                        <forceChatter:feed  type="Record"
+                                            aura:id="chatterFeed"
+                                            feedDesign="{#v.feedDesign}"
+                                            subjectId="{!v.selectGroup.Id}">
+                        </forceChatter:feed>
+                    </div>
+                </aura:set>
+                </aura:if>
+            </aura:if>
+        </div>
+
+        <!-- Debug Information Display -->
+        <aura:set attribute="footer">
+            <aura:if isTrue="{#v.isDebug}">
+                <dl class="slds-dl_horizontal slds-text-align_left" style="word-break: break-word;">
+                    <dt class="slds-dl_horizontal__label slds-truncate">Status:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{!v.message}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Record:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{!v.sObjectName} --> {!v.recordId}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Group Names:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{!v.groups}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Groups:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">
+                        <ul class="slds-list_dotted">
+                            <aura:iteration items="{!v.groupList}" var="iter">
+                                <li>{!iter.Id} - {!iter.Name}</li>
+                            </aura:iteration>
+                        </ul>
+                    </dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Selected:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">
+                        <aura:if isTrue="{!v.selectGroup}">
+                            {!v.selectGroup.Id} - {!v.selectGroup.Name}
+                        <aura:set attribute="else">
+                            "None"
+                        </aura:set>
+                        </aura:if>
+                    </dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        <lightning:formattedUrl value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegChatterGroupSelectorCmp.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                        </lightning:formattedUrl>
+                    </dd>
+                </dl>
+            </aura:if>
+        </aura:set>
+    </lightning:card>
+
+</aura:component>	

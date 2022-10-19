@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sfpegRelatedListKpisInitLabel</fullName>
+        <categories>PEG Component LWC Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegRelatedListKpisInitLabel</shortDescription>
+        <value>Initializing...</value>
+    </labels>
+    <labels>
+        <fullName>sfpegRelatedListKpisLoadLabel</fullName>
+        <categories>PEG Component LWC Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegRelatedListKpisLoadLabel</shortDescription>
+        <value>Loading...</value>
+    </labels>
+</CustomLabels>

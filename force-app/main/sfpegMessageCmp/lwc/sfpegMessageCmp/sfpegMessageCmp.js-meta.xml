@@ -3,16 +3,17 @@
     <apiVersion>47.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>SF PEG Message</masterLabel>
-    <description>This component enables to display a single message in various variants.</description>
+    <description>This component enables to display a simple message in various variants.</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
         <target>lightning__RecordPage</target>
         <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
     </targets>
     <targetConfigs>
-        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage,lightningCommunity__Default">
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
             <property   name="title"            type="String"
                         label="Message Title"   description="Message title to be displayed." />
             <property   name="message"          type="String"
@@ -26,6 +27,25 @@
                         label="CSS class"       description="Wrapper CSS class to change adapt to display environment." />
             <property   name="isDebug"          type="Boolean"
                         label="Show Debug?"     description="Activates the debug logs." />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="title"            type="String"
+                        label="Message Title"   description="Message title to be displayed." />
+            <property   name="message"          type="String"
+                        label="Message Content" description="Message detailed content to be displayed." />
+            <property   name="messageField"     type="String"
+                        label="Message Field"   description="Record Field API Name providing detailed content to be displayed." />
+            <property   name="variant"          type="String"
+                        label="Display Variant" description="Display variant for the message."
+                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
+            <property   name="wrapperCss"       type="String"
+                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment." />
+            <property   name="isDebug"          type="Boolean"
+                        label="Show Debug?"     description="Activates the debug logs." />
+            <property   name="recordId"         type="String"
+                        label="Record ID"       description="ID of the record to be used for merge."/>
+            <property   name="objectApiName"    type="String"
+                        label="Object Name"     description="Object API Name of the record to be used for merge."/>
         </targetConfig>
         <targetConfig targets="lightning__FlowScreen">
             <property   name="title"            type="String"

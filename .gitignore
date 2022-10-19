@@ -59,3 +59,6 @@ ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 .vscode
+
+#Examples
+force-app/test

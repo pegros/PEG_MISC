@@ -32,11 +32,15 @@
             </div>
             <template if:true={isDebug}>
                 <div class="slds-media__figure slds-media__figure_reverse">
-                    <lightning-button-icon  icon-name="utility:help"
-                                            alternative-text="Online Help"
-                                            variant="brand"
-                                            size="small" >
-                    </lightning-button-icon>
+                    <a  class="slds-m-left_x-small onlineHelp"
+                        href='https://github.com/pegros/PEG_MISC/blob/master/help/sfpegMessageCmp.md'
+                        target="_blank">
+                        <lightning-icon icon-name="utility:info"
+                                        variant={configuration.iconVariant} size="xx-small"
+                                        alternative-text="Online Help" 
+                                        title="Click to access Online Help">
+                        </lightning-icon>
+                    </a>
                 </div>
             </template>
         </div>

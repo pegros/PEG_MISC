@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sfpegMultiValueSelectorEditlLabel</fullName>
+        <categories>PEG Component LWC Button Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegMultiValueSelectorEditlLabel</shortDescription>
+        <value>Modify values</value>
+    </labels>
+    <labels>
+        <fullName>sfpegMultiValueSelectorSaveLabel</fullName>
+        <categories>PEG Component LWC Button Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegMultiValueSelectorSaveLabel</shortDescription>
+        <value>Validate changes</value>
+    </labels>
+    <labels>
+        <fullName>sfpegMultiValueSelectorCancelLabel</fullName>
+        <categories>PEG Component LWC Button Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegRecordListCancelLabel</shortDescription>
+        <value>Cancel changes</value>
+    </labels>
+</CustomLabels>

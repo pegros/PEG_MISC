@@ -1,0 +1,12 @@
+.THIS .small {
+    height: 30vh;
+}
+.THIS .medium {
+    height: 50vh;
+}
+.THIS .large {
+    height: 75vh;
+}
+.THIS * .slds-card-wrapper {
+    padding-top: 0 !important;
+}
