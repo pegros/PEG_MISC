@@ -27,6 +27,8 @@ It must be defined as a JSON list of Group Name strings, e.g.
 ["Global Announcements","Help & Training","Online Support"]
 ```
 
+### Contextualisation
+
 Context **merge** tokens are available to dynamically retrieve Chatter Group Names from
 fields on the current User or the current Record (when any). A simple `{{{KEY.fieldName}}}` 
 syntax may be used in such a case.
@@ -40,6 +42,10 @@ Beware that these fields should provide the `names` of the considered Chatter Gr
 
 Empty/null names are ignored as well as Chatter groups not found.
 
+### Permissions
+
+You may need to grant access to your User to the `sfpegChatterGroup_CTL` Apex class,
+e.g. via a dedicated PermissionSet (not included in the Package).
 
 ## Technical Details
 

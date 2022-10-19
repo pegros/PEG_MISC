@@ -28,6 +28,10 @@ Typically for a **contentDocument** record (i.e. a Salesforce **File**), the fie
 contain a URL value like:
 > https://_OrgRootURL_/sfc/servlet.shepherd/document/download/_ContentDocumentId_
 
+### Permissions
+
+You may need to grant access to your User to the `sfpegFieldSetDescription_CTL` Apex class,
+e.g. via a dedicated PermissionSet (not included in the Package).
 
 ## Technical Details
 

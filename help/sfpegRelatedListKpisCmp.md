@@ -39,6 +39,10 @@ The following properties are available:
 * `Inverse Text?` to display labels in inverse mode (for dark backgrounds).
 * `Debug?` to activate debug logs in the browser console and present some configuration details below the component.
 
+### Permissions
+
+You may need to grant access to your User to the `sfpegRelatedListKpis_CTL` Apex class,
+e.g. via a dedicated PermissionSet (not included in the Package).
 
 ## Technical Details
 
