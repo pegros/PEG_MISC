@@ -30,7 +30,7 @@ contain a URL value like:
 
 ### Permissions
 
-You may need to grant access to your User to the `sfpegFieldSetDescription_CTL` Apex class,
+You may need to grant your users access to the `sfpegFieldSetDescription_CTL` Apex class,
 e.g. via a dedicated PermissionSet (not included in the Package).
 
 ## Technical Details

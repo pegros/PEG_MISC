@@ -44,7 +44,7 @@ Empty/null names are ignored as well as Chatter groups not found.
 
 ### Permissions
 
-You may need to grant access to your User to the `sfpegChatterGroup_CTL` Apex class,
+You may need to grant your users access to the `sfpegChatterGroup_CTL` Apex class,
 e.g. via a dedicated PermissionSet (not included in the Package).
 
 ## Technical Details
