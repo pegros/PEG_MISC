@@ -123,7 +123,7 @@ export default class sfpegContextMessageCmp extends LightningElement {
     // Custom getters
     //----------------------------------------------------------------
     get divClass() {
-        return "slds-card slds-has-cushion slds-p-around_x-small " + this.configuration.theme;
+        return  this.configuration.theme + ' ' + this.wrapperCss;
     }
 
     get hideIcon() {

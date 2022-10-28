@@ -24,7 +24,8 @@
                         label="Display Variant" description="Display variant for the message."
                         datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
             <property   name="wrapperCss"       type="String"
-                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment." />
+                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment." 
+                        default="slds-card slds-has-cushion slds-p-around_small" />
             <property   name="isDebug"          type="Boolean"
                         label="Show Debug?"     description="Activates the debug logs." />
         </targetConfig>
@@ -39,7 +40,8 @@
                         label="Display Variant" description="Display variant for the message."
                         datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
             <property   name="wrapperCss"       type="String"
-                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment." />
+                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment."
+                        default="slds-card slds-has-cushion slds-p-around_small" />
             <property   name="isDebug"          type="Boolean"
                         label="Show Debug?"     description="Activates the debug logs." />
             <property   name="recordId"         type="String"
@@ -58,7 +60,8 @@
                         label="Display Variant" description="Display variant for the message."
                         datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
             <property   name="wrapperCss"       type="String"
-                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment." />
+                        label="CSS class"       description="Wrapper CSS class to change adapt to display environment."
+                        default="slds-card slds-has-cushion slds-p-around_small" />
             <property   name="isDebug"          type="Boolean"
                         label="Show Debug?"     description="Activates the debug logs." />
             <property   name="recordId"         type="String"
