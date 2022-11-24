@@ -32,7 +32,11 @@
 
 global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.DynamicPickList {
     
+    /***
+    * @description Static Map providing the actual standard icon name for some special standard objects 
+    ***/
     static Map<String,String> standardObjectMap = new Map<String,String>{
+        'ContentDocument' => 'File',
         'ContentDocumentLink' => 'File',
         'AttachedContentDocument' => 'File',
         'AttachedContentNote' => 'Note',
@@ -43,6 +47,10 @@ global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.Dyna
         'ActionPlan' => 'Entitlement',
         'CampaignMember' => 'Campaign' //campaign_members
     };
+
+    /***
+    * @description Static Map providing the actual custom icon name for some special standard objects 
+    ***/
     static Map<String,String> standardCustomObjectMap = new Map<String,String>{
         'BranchUnitRelatedRecord' => 'Custom16'
     };
@@ -112,8 +120,13 @@ global with sharing class sfpegRelatedListSelector_CTL extends VisualEditor.Dyna
                 if (iterIconData == null) {
                     System.debug(LoggingLevel.FINEST,'getValues: initializing icondata ');
                     if (iterIsCustomObject) {
-                        String iconName = getCustomObjectIcon(iterObjectName);
-                        iterIconData = '"icon":"custom:' + iconName + '","class":"slds-icon-custom-' + iconName + '"';
+                        if (iterObjectName == 'Knowledge__kav') {
+                            iterIconData = '"icon":"standard:article","class":"slds-icon-standard-article"';
+                        }
+                        else {
+                            String iconName = getCustomObjectIcon(iterObjectName);
+                            iterIconData = '"icon":"custom:' + iconName + '","class":"slds-icon-custom-' + iconName + '"';
+                        }
                     }
                     else if (standardCustomObjectMap.containsKey(iterObjectName)) {
                         System.debug(LoggingLevel.FINEST,'getValues: overriding object name ' + iterObjectName);
