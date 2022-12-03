@@ -36,6 +36,12 @@ All the configuration of the **sfpegFileManagerCmp** component is done in the Ap
 Lookup relations may be used when providing the API names of the fields configurable in the
 component, e.g. `Parent.CampaignImageId` to display the file registered on a parent Campaign.
 
+It is possible to automatically set a custom field to a fixed value on the ContentDocuments being
+uploaded (via the `Content Type Field` and `Content Type Value` properties). This enables to tag
+certain files as avatars or banners (e.g. for the **sfpegProfileCmp** component of the 
+**[PEG_LIST](https://github.com/pegros/PEG_LIST)** package). ***Beware** that the API name
+of this field should end with **_fileupload__c** due to a technical contraint coming from the
+**[lightning-file-upload](https://developer.salesforce.com/docs/component-library/bundle/lightning-file-upload/documentation)** base component used.
 
 ## Technical Details
 

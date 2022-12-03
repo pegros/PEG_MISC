@@ -23,6 +23,8 @@
                                                                 name="fileUploader"
                                                                 accept={acceptedFormats}
                                                                 record-id={recordId}
+                                                                file-field-name={contentField}
+                                                                file-field-value={contentValue}
                                                                 onuploadfinished={handleUploadFinished}
                                                                 onclick={handleClick}>
                                         </lightning-file-upload>
@@ -95,6 +97,8 @@
                     <dd class="slds-dl_horizontal__detail slds-wrap">Document: {contentDocumentId} / Last Version: {lastVersionId}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">URL:</dt>
                     <dd class="slds-dl_horizontal__detail slds-wrap">{fileUrl}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">File Data:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{contentField}: {contentValue}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail slds-wrap">
                         <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegFileManagerCmp.md"

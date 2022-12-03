@@ -64,6 +64,15 @@
                         type="String"
                         description="Optional API Name of the multi-select Field containing the tags"/>
 
+            <property   name="contentField"
+                        label="Content Type Field"
+                        type="String"
+                        description="Optional API Name of ContentDocument field to be set on the uploaded file (should end with _fileupload__c !)"/>
+            <property   name="contentValue"
+                        label="Content Type Value"
+                        type="String"
+                        description="Value to be set in the Content Type Field upon upload"/>
+
             <property   name="isDebug"
                         label="Debug ?"
                         type="Boolean"
@@ -123,6 +132,15 @@
                         label="Tags Field"
                         type="String"
                         description="Optional API Name of the multi-select Field containing the tags"/>
+
+            <property   name="contentField"
+                        label="Content Type Field"
+                        type="String"
+                        description="Optional API Name of ContentDocument field to be set on the uploaded file (should end with _fileupload__c !)"/>
+            <property   name="contentValue"
+                        label="Content Type Value"
+                        type="String"
+                        description="Value to be set in the Content Type Field upon upload"/>
 
             <property   name="isDebug"
                         label="Debug ?"

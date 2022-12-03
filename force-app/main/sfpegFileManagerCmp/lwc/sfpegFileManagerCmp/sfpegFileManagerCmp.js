@@ -56,6 +56,9 @@ export default class SfpegFileManagerCmp extends NavigationMixin(LightningElemen
     @api descField;                 // Optional API Name of the field containing an additional textual description
     @api tagField;                  // Optional API Name of the multi-select field containing tags to display below
 
+    @api contentField;              // Optional API Name of ContentDocument field to be set on the uploaded file
+    @api contentValue;              // Value to be set in the contentField upon upload
+
     @api showUpload = false;        // Flag to show upload button when no image is present
     @api basePath;                  // Base path of the community
 
