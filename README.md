@@ -1,6 +1,4 @@
----
-# SFPEG MISC Components
----
+# ![Logo](/media/Logo.png) &nbsp; SFPEG MISC Components
 
 ## Introduction
 
