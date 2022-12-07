@@ -1,6 +1,4 @@
----
-# **sfpegChatterGroupSelectorCmp** Component
----
+# ![Logo](/media/Logo.png) &nbsp; **sfpegChatterGroupSelectorCmp** Component
 
 ## Introduction
 

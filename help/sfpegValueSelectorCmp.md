@@ -1,6 +1,4 @@
----
-# **sfpegValueSelectorCmp** Component
----
+# ![Logo](/media/Logo.png) &nbsp; **sfpegValueSelectorCmp** Component
 
 ## Introduction
 

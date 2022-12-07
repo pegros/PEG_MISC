@@ -1,6 +1,4 @@
----
-# **sfpegFileManagerCmp** Component
----
+# ![Logo](/media/Logo.png) &nbsp; **sfpegFileManagerCmp** Component
 
 ## Introduction
 

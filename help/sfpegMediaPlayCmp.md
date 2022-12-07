@@ -1,6 +1,4 @@
----
-# **sfpegMediaPlayCmp** Component
----
+# ![Logo](/media/Logo.png) &nbsp; **sfpegMediaPlayCmp** Component
 
 ## Introduction
 

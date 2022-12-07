@@ -1,6 +1,4 @@
----
-# **sfpegRelatedListKpisCmp** Component
----
+# ![Logo](/media/Logo.png) &nbsp; **sfpegRelatedListKpisCmp** Component
 
 ## Introduction
 
