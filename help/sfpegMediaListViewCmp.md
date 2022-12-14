@@ -68,7 +68,7 @@ The following properties are available:
 ## Technical Details
 
 The  **sfpegMediaListViewCmp** has no Apex class dependency and entirely relies on
-* the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech values for the first records of the List View.
+the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech values for the first records of the List View.
 
 It relies on special Salesforce endpoints (having existed for a while but not really officially documented)
 to fetch the content of each image displayed:
