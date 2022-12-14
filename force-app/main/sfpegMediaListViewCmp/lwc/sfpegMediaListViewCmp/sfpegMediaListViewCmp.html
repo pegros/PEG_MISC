@@ -1,0 +1,137 @@
+<template>
+    <div class={cardClass} >
+        <lightning-card title={cardTitle} icon-name={cardIcon}>
+
+            <!-- Header action buttons -->
+            <lightning-button-group slot="actions" if:true={hasActions}>
+                <lightning-button-icon  if:true={showOpen}
+                                        icon-name="utility:open"     alternative-text={openLabel}
+                                        title={openLabel}
+                                        onclick={handleOpen}>
+                </lightning-button-icon>
+                <lightning-button-icon  if:true={showRefresh}
+                                        icon-name="utility:refresh"  alternative-text={refreshLabel}
+                                        title={refreshLabel}
+                                        onclick={handleRefresh}>
+                </lightning-button-icon>
+            </lightning-button-group>
+
+            <!-- Error Message Display -->
+            <div    class="slds-box slds-box_small slds-m-around_small"
+                    if:true={errorMsg}>
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="utility:error"
+                                        variant="error" size="small"
+                                        alternative-text="Error">
+                        </lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <lightning-formatted-text   class="slds-text-color_error"
+                                                    value={errorMsg}>
+                        </lightning-formatted-text>
+                    </div>
+                </div>
+            </div>
+
+            <div class={listClass}>
+                <lightning-layout   multiple-rows="true"
+                                    if:true={displayData}  >
+                    <template for:each={displayData} for:item="iter">
+
+                        <!-- Unitary Tile Display -->
+                        <lightning-layout-item  key={iter.id}  size={tileSize}  >
+                            <div class={tileClass}>
+                                <div class="slds-media slds-media_center">
+                                    <div class="slds-media__figure" if:true={iter.icon}>
+                                        <div class="slds-m-left_x-small">
+                                            <img src={iter.icon} class={iconClass} alt={fieldLabels.icon} title={fieldLabels.icon} />
+                                        </div>
+                                    </div>
+                                    <div class="slds-media__body slds-p-right_x-small" >
+                                        <h1 class="slds-var-p-vertical_xx-small"
+                                            if:true={iter.title}
+                                            title={fieldLabels.title}>
+                                            <lightning-formatted-text   class="slds-text-title_bold"
+                                                                        value={iter.title} >
+                                            </lightning-formatted-text>
+                                        </h1>
+                                        <!-- style="height: 100px;" slds-scrollable_y-->
+                                        <div    class="slds-var-p-vertical_xx-small"
+                                                if:true={iter.description}
+                                                title={fieldLabels.description}>
+                                            <!-- slds-truncate descContent slds-text-body_regular  -->
+                                            <lightning-formatted-rich-text  class="slds-text-body_small"
+                                                                            value={iter.description}>
+                                            </lightning-formatted-rich-text>
+                                        </div>
+                                        <div    class="slds-var-p-vertical_xx-small"
+                                                if:true={iter.details}>
+                                            <ul class="slds-list_horizontal slds-has-dividers_left slds-listbox slds-listbox_horizontal">      
+                                                <template for:each={iter.details} for:item="iterD">
+                                                    <li key={iterD.name}
+                                                        title={iterD.label}
+                                                        class="slds-item slds-text-body_small">
+                                                        <lightning-formatted-text   class="slds-text-body_small slds-text-color_weakZ"
+                                                                                    value={iterD.value} >
+                                                        </lightning-formatted-text>
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                        <div class="slds-var-p-vertical_xx-small slds-media slds-media_center">
+                                            <div class="slds-media__body">
+                                                <ul class="slds-list_horizontal slds-has-block-links_space slds-listbox slds-listbox_horizontal"
+                                                    if:true={iter.badges}
+                                                    title={fieldLabels.badge}>      
+                                                    <template for:each={iter.badges} for:item="iterB">
+                                                        <li key={iterB}  class="slds-item slds-text-body_small badgeItem">
+                                                            <!-- slds-badge_inverse -->
+                                                            <lightning-badge label={iterB} class="slds-badge_lightest">
+                                                            </lightning-badge>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                            <div class="slds-media__figure slds-media__figure_reverse">
+                                                <!-- slds-m-right_x-small  -->
+                                                <lightning-button   variant={buttonVariant}     class="navigationButton"
+                                                                    icon-name={seeMoreIcon}     icon-position="right"
+                                                                    label={seeMoreLabel}
+                                                                    data-target={iter.id}   onclick={handleSeeMore}>
+                                                </lightning-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </div>
+            
+            <!-- Debug Info Display -->
+            <div    slot="footer" 
+                    if:true={isDebug}
+                    class="footerContent">
+                <dl class="slds-dl_horizontal slds-text-align_left" style="word-break: break-word;">
+                    <dt class="slds-dl_horizontal__label slds-truncate">List View:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">{objectName} / {listViewName}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Fields:</dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Icon: {iconField} / Title: {titleField}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate"></dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Description: {descField} / Details: {detailFields}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate"></dt>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Pills: {pillField} / Target: {targetField} </dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegListViewCmp.md"
+                                                    label="See Help on GitHub"
+                                                    target="_blank">
+                        </lightning-formatted-url>
+                    </dd>
+                </dl>
+            </div>
+        </lightning-card>
+    </div>
+</template>

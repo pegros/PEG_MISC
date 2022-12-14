@@ -1,0 +1,63 @@
+.footerContent {
+    padding-top: var(--lwc-varSpacingVerticalMedium);
+    padding-bottom: var(--lwc-varSpacingVerticalMedium);
+    padding-left: var(--lwc-varSpacingVerticalMedium);
+    padding-right: var(--lwc-varSpacingVerticalMedium);
+    width:100%;
+}
+.navigationButton {
+    --slds-c-button-line-height: 0px;
+    --slds-c-button-sizing-border: 0px;
+    --slds-c-button-spacing-inline-start: 0px !important;
+    --slds-c-button-inverse-spacing-inline-start: 0px !important;
+    --slds-c-button-spacing-inline-end: 0px !important;
+    --slds-c-button-inverse-spacing-inline-end: 0px !important;
+    --slds-c-button-color-border-active: transparent !important;
+    --slds-c-button-color-border-hover: transparent !important;
+    --slds-c-button-inverse-color-background: transparent !important;
+    --slds-c-button-inverse-color-background-active: transparent !important;
+    --slds-c-button-inverse-color-background-hover: transparent !important;
+    --slds-c-button-inverse-color-border: transparent !important;
+    --slds-c-button-inverse-color-border-active: transparent !important;
+    --slds-c-button-inverse-color-border-focus: transparent !important;
+    --slds-c-button-inverse-color-border-hover: transparent !important;
+    --slds-c-button-inverse-text-color: white;
+    --slds-c-button-inverse-text-color-active: white;
+    --slds-c-button-inverse-text-color-hover: white; /*color-text-link-inverse*/
+}
+.icon-xxx-large {
+    max-width: 84px;
+}
+.icon-xx-large {
+    max-width: 72px;
+}
+.icon-x-large {
+    max-width: 60px;
+}
+.icon-large {
+    max-width: 48px;
+}
+.icon-medium {
+    max-width: 36px;
+}
+.icon-small {
+    max-width: 24px;
+}
+.icon-x-small {
+    max-width: 12px;
+}
+.badgeItem {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.badgeItem + .badgeItem {
+    margin-left: var(--lwc-varSpacingHorizontalSmall);
+}
+.descContent {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    --lwc-lineHeightText: normal !important;
+    --lwc-varLineHeightText: normal !important;
+    line-height: normal !important;
+}

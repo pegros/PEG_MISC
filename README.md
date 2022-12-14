@@ -63,6 +63,12 @@ file (ContentDocument of video, audio or image type) referenced on the current r
 
 ![Media Player](/media/sfpegMediaPlayer.png) 
 
+### [sfpegMediaListViewCmp](/help/sfpegMediaListViewCmp.md)
+This component enables to to display the first records of any List View
+as a list of media tiles
+
+![Media List View](/media/sfpegMediaListView.png)
+
 ### [sfpegMessageCmp](/help/sfpegMessageCmp.md)
 This component enables to display a simple structured message in various variants.
 
