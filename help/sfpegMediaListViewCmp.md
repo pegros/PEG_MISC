@@ -14,8 +14,10 @@ list of field values and a set of badges
 Each content property comes from fields defined on the main object of the List View. Fields used
 do not necessarily need to be present in the List View configuration.
 
-Multiple **CSS** properties have been made available to customise the rendering of the component 
+Multiple **CSS** and layout properties have been made available to customise the rendering of the component 
 via standard **[SLDS](https://www.lightningdesignsystem.com/)** utility classes (e.g. theme, padding, box...)
+
+![Inverse Media List View](/media/sfpegMediaListViewInverse.png)
 
 
 ## Configuration
