@@ -34,16 +34,17 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { NavigationMixin }  from 'lightning/navigation';
 import { getRecord, getRecordNotifyChange } from 'lightning/uiRecordApi';
+//import { CurrentPageReference } from 'lightning/navigation';
 
-import REFRESH_LABEL   from '@salesforce/label/c.sfpegMediaPlayRefreshLabel';
-import MISSING_FIELD_ERROR from '@salesforce/label/c.sfpegMediaPlayMissingFileIdError';
-import INVALID_FILE_ID_ERROR from '@salesforce/label/c.sfpegMediaPlayInvalidFileIdError';
+import REFRESH_LABEL            from '@salesforce/label/c.sfpegMediaPlayRefreshLabel';
+import MISSING_FIELD_ERROR      from '@salesforce/label/c.sfpegMediaPlayMissingFileIdError';
+import INVALID_FILE_ID_ERROR    from '@salesforce/label/c.sfpegMediaPlayInvalidFileIdError';
 import INVALID_FILE_PREFIX_ERROR from '@salesforce/label/c.sfpegMediaPlayInvalidFileIdPrefixError';
-import FILE_DATA_ERROR from '@salesforce/label/c.sfpegMediaPlayFileDataRetrievalError';
+import FILE_DATA_ERROR          from '@salesforce/label/c.sfpegMediaPlayFileDataRetrievalError';
 
 const FILE_TYPES_MAP = {
     video: ['MOV','WMV', 'MP4', 'AVI'],
-    audio: ['WAV','MP3'],
+    audio: ['WAV','MP3','M4A'],
     image: ['JPG','PNG','JPEG','PDF']
 }
 
@@ -87,6 +88,9 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
     @track fileUrl;             // Download URL of the file
 
     @track errorMsg;            // Possible error message.
+
+    //@wire(CurrentPageReference)
+    //currentPageRef;
 
     //----------------------------------------------------------------
     // Custom Labels
@@ -147,6 +151,12 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
         if (this.isDebug) console.log('connected: recordFields init', recordFields);
         this.recordFields = recordFields;
 
+        /*if (this.isDebug) console.log('connected: current pageRef ',this.currentPageRef);
+        this[NavigationMixin.GenerateUrl](this.currentPageRef)
+        .then((url) => {
+            if (this.isDebug) console.log('connected: current url ',url);
+        });*/
+
         if (this.isDebug) console.log('connected: END');
     }
 
@@ -177,7 +187,7 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
             }
             else if (fileId.substr(0,3) !== '069') {
                 this.fileId = null;
-                console.warn('wiredRecord: Bad Referenced Fil ID prefix (should be 069 / ContentDocument)!',fileId);
+                console.warn('wiredRecord: Bad Referenced File ID prefix (should be 069 / ContentDocument)!',fileId);
                 //this.errorMsg = 'Referenced File ID prefix is invalid!';
                 this.errorMsg = INVALID_FILE_PREFIX_ERROR;
                 this.isReady = true;
@@ -243,11 +253,16 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
         if (this.isDebug) console.log('initFileUrl: of type ',docType);
         if (this.isDebug) console.log('initFileUrl: with last version ID ',versionId);
 
-        let rootUrl = 'https://' + window.location.hostname;
+        let rootUrl = '';
+        if (this.basePath) {
+            if (this.isDebug) console.log('connected: community basePath defined ', this.basePath);
+            rootUrl += '/' + this.basePath;//(instead of s)
+        }
+        /*let rootUrl = 'https://' + window.location.hostname;
         if (this.basePath) {
             if (this.isDebug) console.log('initFileUrl: adding community basePath ', this.basePath);
-            rootUrl += '/' +  this.basePath + '/s';
-        }
+            rootUrl += '/' +  this.basePath + '/';
+        }*/
 
         if (docType === 'PDF') {
             if (this.isDebug) console.log('initFileUrl: END PDF url ', this.basePath);
@@ -280,12 +295,30 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
         }
         else {
             if (this.isDebug) console.log('showPreview: community case');
-            this[NavigationMixin.Navigate]({
+
+            /*let pageRef = {
+                type: 'standard__recordPage',
+                attributes: {
+                    recordId:       this.fileId,
+                    objectApiName:  'ContentDocument',
+                    actionName:     'view'
+                }this.fileUrl
+                 /PEGLWR/test-peg/a1F5E00000MvJ70UAF/child-a
+                 /PEGLWR/sfc/servlet.shepherd/document/download/0695E0000008NbCQAU
+                 /PEGLWR/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0685E000003dKXfQAM
+                /PEGAURA/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0685E000003dKXfQAM
+            };*/
+            //if (this.isDebug) console.log('showPreview: current pageRef ',this.currentPageRef);
+            
+            let pageRef = {
                 type: 'standard__webPage',
                 attributes: {
-                    url: this.fileUrl
+                    url: 'https://' + window.location.hostname + '/' + this.basePath + '/sfc/servlet.shepherd/document/download/' + this.fileId
                 }
-            }, false );
+            };
+            if (this.isDebug) console.log('showPreview: opening pageRef ',pageRef);
+
+            this[NavigationMixin.Navigate](pageRef, false);
         }
         if (this.isDebug) console.log('showPreview: END');
     }
