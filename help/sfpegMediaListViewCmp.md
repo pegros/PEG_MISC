@@ -35,9 +35,9 @@ The following properties are available:
 * tile list display configuration:
     * `List CSS Class` (optional) to define a style for the component content section (e.g. to add padding)
     * `Tile CSS Class` (optional) to define a style for each tile (e.g. to define background and border)
-    * `Tile Size`to define the size of each tile as a divider of the 12 column content section
+    * `Tile Size` to define the size of each tile as a divider of the 12 column content section
     (**12** corresponding to 1 tile per row, **6** to 2 tiles per row...)
-    * `Icon Size`to define the size of each icon, out of a predefined set (from x-small to xxx-large)
+    * `Icon Size` to define the size of each icon, out of a predefined set (from x-small to xxx-large)
     * `buttonVariant` to define the variant (_bare_ or _inverse_) of the **See more** navigation button
     within each tile (_inverse_ being useful when a dark tile background is set via  `tileClass`)
 * global action configuration:
