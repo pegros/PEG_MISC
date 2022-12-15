@@ -78,4 +78,5 @@ It also uses special Salesforce endpoints (having existed for a while but not re
 to fetch the content of each image displayed:
 * `/sfc/servlet.shepherd/document/download/` for standard ContentDocument files (with Salesforce ID)
 * `/file-asset/` for Asset files (with asset file name)
+
 ⚠️ When used in Experience Cloud, the `Site Name` property must be set for these downloads to work.
