@@ -70,17 +70,12 @@ are available. They all start with the `sfpegMediaListView` prefix.
 ## Technical Details
 
 The  **sfpegMediaListViewCmp** has no Apex class dependency and entirely relies on
-the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech values for the first records of the List View.
+the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech values for the first records of the List View, especially:
+* the standard **[getListUi](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_lightning_ui_api_list_ui)** wire service to fetch List View records (⚠️ This service is in ***deprecated*** status but is still operational).
+* the **[getObjectInfo](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_object_info)** wire service to fetch field labels and help text.
 
-It relies on special Salesforce endpoints (having existed for a while but not really officially documented)
+It also uses special Salesforce endpoints (having existed for a while but not really officially documented)
 to fetch the content of each image displayed:
 * `/sfc/servlet.shepherd/document/download/` for standard ContentDocument files (with Salesforce ID)
-* `/file-asset/`for Asset files (with asset file name)
-
-When used in Experience Cloud, the `Site Name` property must be set and is directly used for these download
-operations.
-
-⚠️ This component currently relies on the standard **[getListUi](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_lightning_ui_api_list_ui)**
-wire service to fetch List View records. This service is in _deprecated_ status but is still operational.
-
-It also relies on the **[getObjectInfo](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_object_info)** wire service to fetch field labels and help text.
+* `/file-asset/` for Asset files (with asset file name)
+⚠️ When used in Experience Cloud, the `Site Name` property must be set for these downloads to work.
