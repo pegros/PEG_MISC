@@ -64,6 +64,8 @@ The following properties are available:
     * `Debug?` to activate/show debug information
     * `Site Name` (only for Experience Cloud) to provide the Site Name to be included in the image download URLs
 
+For further customisation and/or internationalisation, multiple custom labels (e.g. for **See more** button)
+are available. They all start with the `sfpegMediaListView` prefix.
 
 ## Technical Details
 
@@ -77,3 +79,8 @@ to fetch the content of each image displayed:
 
 When used in Experience Cloud, the `Site Name` property must be set and is directly used for these download
 operations.
+
+⚠️ This component currently relies on the standard **[getListUi](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_lightning_ui_api_list_ui)**
+wire service to fetch List View records. This service is in _deprecated_ status but is still operational.
+
+It also relies on the **[getObjectInfo](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_object_info)** wire service to fetch field labels and help text.
