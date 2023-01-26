@@ -111,7 +111,7 @@ export default class sfpegContextMessageCmp extends LightningElement {
     //----------------------------------------------------------------
     @api    recordId;
     @api    objectApiName;
-    @track  recordFields = null;
+    @track  recordField = null;
 
     //----------------------------------------------------------------
     // Internal parameters
@@ -140,23 +140,50 @@ export default class sfpegContextMessageCmp extends LightningElement {
         if (this.isDebug) console.log('Connected: configuration set ', JSON.stringify(this.configuration));
 
         if (this.messageField) {
-            this.recordFields = [ this.objectApiName + '.' + this.messageField];
-            if (this.isDebug) console.log('Connected: fetching message field value ', JSON.stringify(this.recordFields));
+            this.recordField = this.objectApiName + '.' + this.messageField;
+            if (this.isDebug) console.log('Connected: fetching message field value ', this.recordField);
         }
         console.log('Connected: END');
     }
 
-    @wire(getRecord, { recordId: "$recordId", fields: '$recordFields' })
+    @wire(getRecord, { recordId: "$recordId", fields: '$recordField' })
     wiredRecord({ error, data }) {
         if (this.isDebug) console.log('wiredRecord: START with ID ', this.recordId);
-        if (this.isDebug) console.log('wiredRecord: and recordFields ', JSON.stringify(this.recordFields));
+        if (this.isDebug) console.log('wiredRecord: and recordField ', this.recordField);
         
         if (data) {
             if (this.isDebug) console.log('wiredRecord: data received ', JSON.stringify(data));
 
-            if (this.isDebug) console.log('wiredRecord: data fields ', JSON.stringify(data.fields));
-            if (this.isDebug) console.log('wiredRecord: message field ', JSON.stringify((data.fields)[this.messageField]));
-            this.recordMessage = ((data.fields)[this.messageField]).displayValue || ((data.fields)[this.messageField]).value;
+            //if (this.isDebug) console.log('wiredRecord: data fields ', JSON.stringify(data.fields));
+            let fieldValue = '';
+            try {
+                if (this.messageField.includes('.')) {
+                    let fieldParts = this.messageField.split('.');
+                    if (this.isDebug) console.log('wiredRecord: getting complex messageField value ', fieldParts);
+                    fieldValue = data;
+                    let lastIndex = fieldParts.size - 1;
+                    fieldParts.forEach((iter,index) => {
+                        if (index == lastIndex) {
+                            fieldValue = fieldValue?.fields[iter]?.displayValue || fieldValue?.fields[iter]?.value;
+                        }
+                        else {
+                            fieldValue = fieldValue?.fields[iter]?.value;
+                        }
+                    });
+                }
+                else {
+                    if (this.isDebug) console.log('wiredRecord: getting simple messageField value ', this.messageField);
+                    fieldValue = data.fields[this.messageField]?.displayValue || data.fields[this.messageField]?.value;
+                }
+            }
+            catch (error) {
+                console.warn('wiredRecord: error while extracting messageField value ', JSON.stringify(error));
+            }
+            if (this.isDebug) console.log('wiredRecord: fieldValue extracted ', fieldValue);
+
+            //if (this.isDebug) console.log('wiredRecord: message field ', JSON.stringify((data.fields)[this.messageField]));
+            //this.recordMessage = ((data.fields)[this.messageField]).displayValue || ((data.fields)[this.messageField]).value;
+            this.recordMessage = fieldValue;
             if (this.isDebug) console.log('wiredRecord: record message set ', this.recordMessage);
         }
         else if (error) {
