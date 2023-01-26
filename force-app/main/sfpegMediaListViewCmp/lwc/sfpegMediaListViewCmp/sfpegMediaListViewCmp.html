@@ -40,7 +40,7 @@
                     <template for:each={displayData} for:item="iter">
 
                         <!-- Unitary Tile Display -->
-                        <lightning-layout-item  key={iter.id}  size={tileSize}  >
+                        <lightning-layout-item  key={iter.id}  size="12" medium-device-size={tileSize}  >
                             <div class={tileClass}>
                                 <div class="slds-media slds-media_center">
                                     <div class="slds-media__figure" if:true={iter.icon}>
@@ -120,9 +120,9 @@
                     <dt class="slds-dl_horizontal__label slds-truncate">Fields:</dt>
                     <dd class="slds-dl_horizontal__detail slds-wrap">Icon: {iconField} / Title: {titleField}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate"></dt>
-                    <dd class="slds-dl_horizontal__detail slds-wrap">Description: {descField} / Details: {detailFields}</dd>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Description: {descField} / Badge: {badgeField}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate"></dt>
-                    <dd class="slds-dl_horizontal__detail slds-wrap">Pills: {pillField} / Target: {targetField} </dd>
+                    <dd class="slds-dl_horizontal__detail slds-wrap">Details: {detailFields}</dd>
                     <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
                     <dd class="slds-dl_horizontal__detail">
                         <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegListViewCmp.md"
