@@ -313,7 +313,8 @@ export default class SfpegMediaPlayCmp extends NavigationMixin(LightningElement)
             let pageRef = {
                 type: 'standard__webPage',
                 attributes: {
-                    url: 'https://' + window.location.hostname + '/' + this.basePath + '/sfc/servlet.shepherd/document/download/' + this.fileId
+                    url: 'https:/' + this.basePath + '/sfc/servlet.shepherd/document/download/' + this.fileId
+                    //url: 'https://' + window.location.hostname + '/' + this.basePath + '/sfc/servlet.shepherd/document/download/' + this.fileId
                 }
             };
             if (this.isDebug) console.log('showPreview: opening pageRef ',pageRef);

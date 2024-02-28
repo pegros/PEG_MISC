@@ -8,11 +8,6 @@
         <isRequired>false</isRequired>
     </displayedFields>
     <displayedFields>
-        <field>FinServ__BillingAddress__pc</field>
-        <isFieldManaged>false</isFieldManaged>
-        <isRequired>false</isRequired>
-    </displayedFields>
-    <displayedFields>
         <field>Industry</field>
         <isFieldManaged>false</isFieldManaged>
         <isRequired>false</isRequired>

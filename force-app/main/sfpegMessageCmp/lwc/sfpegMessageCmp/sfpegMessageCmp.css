@@ -13,6 +13,9 @@
     padding-top: 0px !important;
     background-color : var(--lwc-colorBackgroundToastError,rgb(194, 57, 52)) !important;
 }
+/*.slds-theme_inverse {
+    background-color : var(--lwc-brandBackgroundPrimary,rgb(1, 68, 134)) !important;
+}*/
 .slds-p-around_x-small {
     padding: var(--lwc-spacingXSmall,0.5rem) !important;
 }

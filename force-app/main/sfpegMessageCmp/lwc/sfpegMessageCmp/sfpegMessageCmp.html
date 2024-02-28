@@ -13,19 +13,19 @@
             <div class={configuration.textVariant}>
                 <template if:true={title}>
                     <h2 class="slds-text-heading_small" style="word-wrap: break-word !important;">
-                        <lightning-formatted-text value={title} >
+                        <lightning-formatted-text value={title} class={configuration.textVariant}>
                         </lightning-formatted-text>
                     </h2>
                 </template>
                 <template if:true={message}>
                     <p class="slds-text-body_regular">
-                        <lightning-formatted-rich-text value={message} >
+                        <lightning-formatted-rich-text value={message} class={configuration.textVariant} >
                         </lightning-formatted-rich-text>
                     </p>
                 </template>
                 <template if:true={recordMessage}>
                     <p class="slds-text-body_regular">
-                        <lightning-formatted-rich-text value={recordMessage} >
+                        <lightning-formatted-rich-text value={recordMessage} class={configuration.textVariant} >
                         </lightning-formatted-rich-text>
                     </p>
                 </template>

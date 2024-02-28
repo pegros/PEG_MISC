@@ -91,6 +91,18 @@ const sfpegMessageConfigurations = {
         "iconVariant": "success",
         "theme"      : "slds-theme_default",
         "textVariant": "slds-text-color_success"
+    },
+    "alert": {
+        "iconName"   : "utility:alert",
+        "iconVariant": "inverse",
+        "theme"      : "slds-theme_inverse",
+        "textVariant": "slds-text-color_inverse"
+    },
+    "alert-light": {
+        "iconName"   : "utility:alert",
+        "iconVariant": "",
+        "theme"      : "slds-theme_default",
+        "textVariant": "slds-text-color_default"
     }
 }
 
@@ -99,7 +111,7 @@ export default class sfpegContextMessageCmp extends LightningElement {
     //----------------------------------------------------------------
     // Main configuration fields (for App Builder)
     //----------------------------------------------------------------
-    @api wrapperCss;            // CSS classes for the wrapping <div>
+    @api wrapperCss;            // CSS classes  the wrapping <div>
     @api title;                 // Title of the message displayed
     @api message;               // Detailed message content (as String)
     @api messageField;          // Detailed message content (as API name of a text field of current record)
@@ -138,6 +150,9 @@ export default class sfpegContextMessageCmp extends LightningElement {
 
         this.configuration = sfpegMessageConfigurations[this.variant] || sfpegMessageConfigurations.base;
         if (this.isDebug) console.log('Connected: configuration set ', JSON.stringify(this.configuration));
+
+        if (this.isDebug) console.log('Connected: title provided ', this.title);
+        if (this.isDebug) console.log('Connected: message provided ', this.message);
 
         if (this.messageField) {
             this.recordField = this.objectApiName + '.' + this.messageField;

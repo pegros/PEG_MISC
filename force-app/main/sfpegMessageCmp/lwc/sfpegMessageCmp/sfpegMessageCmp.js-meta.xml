@@ -22,7 +22,7 @@
                         label="Message Field"   description="Record Field API Name providing detailed content to be displayed." />
             <property   name="variant"          type="String"
                         label="Display Variant" description="Display variant for the message."
-                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
+                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light,alert,alert-light" />
             <property   name="wrapperCss"       type="String"
                         label="CSS class"       description="Wrapper CSS class to change adapt to display environment." 
                         default="slds-card slds-has-cushion slds-p-around_small" />
@@ -38,7 +38,7 @@
                         label="Message Field"   description="Record Field API Name providing detailed content to be displayed." />
             <property   name="variant"          type="String"
                         label="Display Variant" description="Display variant for the message."
-                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
+                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light,alert,alert-light" />
             <property   name="wrapperCss"       type="String"
                         label="CSS class"       description="Wrapper CSS class to change adapt to display environment."
                         default="slds-card slds-has-cushion slds-p-around_small" />
@@ -58,7 +58,7 @@
                         label="Message Field"   description="Record Field API Name providing detailed content to be displayed." />
             <property   name="variant"          type="String"
                         label="Display Variant" description="Display variant for the message."
-                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light" />
+                        datasource="base,notif,info,info-light,warning,warning-light,error,error-light,success,success-light,alert,alert-light" />
             <property   name="wrapperCss"       type="String"
                         label="CSS class"       description="Wrapper CSS class to change adapt to display environment."
                         default="slds-card slds-has-cushion slds-p-around_small" />
