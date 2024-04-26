@@ -43,6 +43,11 @@ leveraging a same set of values provided by a multi-picklist field, each value b
 
 ![Multi-Value Selector](/media/sfpegMultiValueSelector.png)
 
+### [sfpegMultiValuePillCmp](/help/sfpegMultiValuePillCmp.md)
+This component component basically enables to display a picklist or multi-picklist field value in a more graphical or user-friendly way
+
+![MultiValue Display in pill mode](/media/sfpegMultiValuePillPill.png)
+
 ### [sfpegFileManagerCmp](/help/sfpegFileManagerCmp.md)
 This component enables to upload and display a file
 related to the current record (the file ID being stored on a record field), possibly with 

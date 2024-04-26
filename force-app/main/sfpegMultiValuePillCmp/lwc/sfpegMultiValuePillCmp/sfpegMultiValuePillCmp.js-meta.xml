@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG MultiValue Tags</masterLabel>
+
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property   name="recordField"
+                        label="Record Field"
+                        type="String"
+                        datasource="apex://sfpegMultiPicklistSelector_CTL"
+                        description="(Multi-)Picklist field to be used on current record (as 'Object.Field' API name)."/>
+
+            <property   name="variant"
+                        label="Display Variant"
+                        type="String"
+                        default="badge"
+                        datasource="badge,pill,text"
+                        description="Display variant of each value"/>
+            <property   name="showLabel"
+                        label="Show Label?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show the field label above the value."/>
+            <property   name="showBorder"
+                        label="Show bottom Border ?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to display the bottom border as in standard forms."/>
+
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-m-horizontal_medium"
+                        description="CSS Classes for the wrapping div"/>
+            <property   name="tagCss"
+                        label="Tag CSS Class"
+                        type="String"
+                        default="slds-m-around_x-small"
+                        description="CSS Classes for the individual tags"/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property   name="recordField"
+                        label="Record Field"
+                        type="String"
+                        datasource="apex://sfpegMultiPicklistSelector_CTL"
+                        description="(Multi-)Picklist field to be used on current record (as 'Object.Field' API name)."/>
+
+            <property   name="variant"
+                        label="Display Variant"
+                        type="String"
+                        default="badge"
+                        datasource="badge,pill,text"
+                        description="Display variant of each value (badge,pill,text)"/>
+            <property   name="showLabel"
+                        label="Show Label?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show the field label above the value."/>
+            <property   name="showBorder"
+                        label="Show bottom Border ?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to display the bottom border as in standard forms."/>
+
+            <property   name="wrapperCss"
+                        label="Wrapping CSS Class"
+                        type="String"
+                        default="slds-m-horizontal_medium"
+                        description="CSS Classes for the wrapping div"/>
+            <property   name="tagCss"
+                        label="Tag CSS Class"
+                        type="String"
+                        default="slds-m-around_x-small"
+                        description="CSS Classes for the individual tags"/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+
+            <property   name="objectApiName"
+                        label="Object API Name"
+                        type="String"
+                        default="{!Route.objectApiName}"
+                        description="API Name of Current Object."/>
+            <property   name="recordId"
+                        label="Record ID"
+                        type="String"
+                        default="{!Route.recordId}"
+                        description="ID of current Record"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

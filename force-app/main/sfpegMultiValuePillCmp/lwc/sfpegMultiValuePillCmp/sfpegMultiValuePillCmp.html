@@ -1,0 +1,74 @@
+<template>
+    <!-- Component Display -->
+    <template lwc:if={tags}>
+        <div class={wrapperCss}>
+            <div class={elementClass}>
+                <template lwc:if={showLabel}>
+                    <span class="slds-form-element__label">{recordFieldLabel}</span>
+                </template>
+                <div class="slds-form-element__control">
+                    <template lwc:if={isBadge}>
+                        <div class="slds-grid slds-wrap">
+                            <template for:each={tags} for:item="eachItem">
+                                <lightning-badge    label={eachItem}    key={eachItem}  class={tagCss}>
+                                </lightning-badge>
+                            </template>
+                        </div>
+                    </template>
+                    <template lwc:elseif={isPill}>
+                        <div class="slds-grid slds-wrap">
+                            <template for:each={tags} for:item="eachItem">
+                                <span class={pillClass} key={eachItem}>
+                                    <span class="slds-pill__label">{eachItem}</span>
+                                </span>
+                                <!--
+                                <lightning-pill label={eachItem}    key={eachItem}  class={tagCss}>
+                                </lightning-pill>
+                                -->
+                            </template>
+                        </div>
+                    </template>
+                    <template lwc:else>
+                        <p class="slds-wrap">{csvValue}</p>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Empty Display -->
+    <template lwc:else>
+        <template lwc:if={showLabel}>
+            <div class={elementClass}>
+                <span class="slds-form-element__label">{recordFieldLabel}</span>
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <!-- Component Display -->
+    <template lwc:if={isDebug}>
+        <div class="slds-box slds-theme_default slds-text-color_default slds-m-vertical_x-small">
+            <dl class="slds-dl_horizontal slds-text-align_left">
+                <dt class="slds-dl_horizontal__label slds-truncate">Variant:</dt>
+                <dd class="slds-dl_horizontal__detail">{variant}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Field:</dt>
+                <dd class="slds-dl_horizontal__detail">{recordField}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
+                <dd class="slds-dl_horizontal__detail">{objectApiName}  - ID: {recordId} - RT: {recordTypeId}</dd>
+                <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                <dd class="slds-dl_horizontal__detail">
+                    <lightning-formatted-url    value="https://github.com/pegros/PEG_MISC/blob/master/help/sfpegMultiValuePillCmp.md"
+                                                label="See Help on GitHub"
+                                                target="_blank">
+                    </lightning-formatted-url>
+                </dd>
+            </dl>
+        </div>
+    </template>
+    <div class="slds-form-element__static">
+    </div>
+
+</template>
