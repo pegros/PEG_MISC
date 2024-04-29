@@ -56,8 +56,8 @@
             <property   name="recordField"
                         label="Record Field"
                         type="String"
-                        datasource="apex://sfpegMultiPicklistSelector_CTL"
                         description="(Multi-)Picklist field to be used on current record (as 'Object.Field' API name)."/>
+            <!-- datasource="apex://sfpegMultiPicklistSelector_CTL" -->
 
             <property   name="variant"
                         label="Display Variant"

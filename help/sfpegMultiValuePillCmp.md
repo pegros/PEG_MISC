@@ -3,7 +3,7 @@
 ## Introduction
 
 The **sfpegMultiValuePillCmp** component basically enables to display a picklist or multi-picklist
-field value in a more graphical or user-friendly way:
+field value in a more graphical and user-friendly way:
 * by replacing the ';' characters in a multi value picklist by ', '
 
 ![MultiValue Display in text mode](/media/sfpegMultiValuePillText.png)
@@ -16,6 +16,7 @@ field value in a more graphical or user-friendly way:
 
 ![MultiValue Display in pill mode](/media/sfpegMultiValuePillPill.png)
 
+ℹ️ Pending evolution for the capacity to switch to edit mode.
 
 ## Configuration
 
@@ -38,7 +39,10 @@ directly available from dropdown.
 
 ⚠️ This component is only available for Record pages to display information about the current record. In Experience Site Builder, this information has to be explicitly provided in the `objectApiName`and `recordId` properties.
 
-The  **sfpegFileManagerCmp** has no Apex class dependency and entirely relies on
-* the **[Lightning Data Service](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/data_ui_api)** to fech/set field values for the current record.
+The  **sfpegMultiValuePillCmp**  relies on multiple LWC wire services:
+* **[getRecord](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_record)** to fetch current record's data
+* **[getObjectInfo](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_wire_adapters_object_info)** to fetch the (multi-)picklist field label
 
-ℹ️ Pending evolution for the capacity to switch to edit mode.
+It also relies on the **sfpegMultiPicklistSelector_CTL** Apex controller class as datasource for the the list of picklist and 
+multi-picklist fields of the current object page in App Builder.
+
