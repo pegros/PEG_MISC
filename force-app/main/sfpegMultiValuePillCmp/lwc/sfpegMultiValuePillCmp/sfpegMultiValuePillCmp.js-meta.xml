@@ -46,6 +46,17 @@
                         default="slds-m-around_x-small"
                         description="CSS Classes for the individual tags"/>
 
+            <property   name="isReadOnly"
+                        label="Read Only?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to enforce read-only mode."/>
+            <property   name="editTitlePrefix"
+                        label="Edit Title Prefix"
+                        type="String"
+                        default="Edit"
+                        description="Prefix for the edit button icon title (followed by field label)"/>
+
             <property   name="isDebug"
                         label="Debug?"
                         type="Boolean"

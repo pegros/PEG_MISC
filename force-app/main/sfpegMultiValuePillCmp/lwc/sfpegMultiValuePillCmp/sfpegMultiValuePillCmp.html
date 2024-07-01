@@ -1,61 +1,68 @@
 <template>
-    <!-- Component Display -->
-    <template lwc:if={tags}>
-        <div class={wrapperCss}>
+    <div class={wrapperCss}>
+
+        <!-- Component Edit Mode Display -->
+        <template lwc:if={isEditMode}>
+            <lightning-record-form  object-api-name={objectApiName} record-type-id={recordTypeId}
+                                    record-id={recordId}            fields={fieldList}
+                                    columns="1"                     mode="edit"
+                                    onsuccess={handleSuccess} >
+            </lightning-record-form>
+        </template>
+
+        <!-- Component Read Mode Display -->
+        <template lwc:else>
+            <!-- Component Read Mode Display -->
             <div class={elementClass}>
                 <template lwc:if={showLabel}>
                     <span class="slds-form-element__label">{recordFieldLabel}</span>
                 </template>
                 <div class="slds-form-element__control">
-                    <template lwc:if={isBadge}>
-                        <div class="slds-grid slds-wrap">
-                            <template for:each={tags} for:item="eachItem">
-                                <lightning-badge    label={eachItem}    key={eachItem}  class={tagCss}>
-                                </lightning-badge>
+                    <div class="slds-grid slds-wrap slds-gutters_x-small slds-grid_pull-padded-x-small">
+                        <template lwc:if={tags}>
+                            <template lwc:if={isBadge}>
+                                <template for:each={tags} for:item="eachItem">
+                                    <div class="slds-col slds-grow-none slds-m-vertical_xx-small" key={eachItem}>
+                                        <lightning-badge    label={eachItem} class={tagCss} key={eachItem}  >
+                                        </lightning-badge>
+                                    </div>
+                                </template>
                             </template>
-                        </div>
-                    </template>
-                    <template lwc:elseif={isPill}>
-                        <div class="slds-grid slds-wrap">
-                            <template for:each={tags} for:item="eachItem">
-                                <span class={pillClass} key={eachItem}>
-                                    <span class="slds-pill__label">{eachItem}</span>
-                                </span>
-                                <!--
-                                <lightning-pill label={eachItem}    key={eachItem}  class={tagCss}>
-                                </lightning-pill>
-                                -->
+                            <template lwc:elseif={isPill}>
+                                <template for:each={tags} for:item="eachItem">
+                                    <div class="slds-col slds-grow-none slds-m-vertical_xx-small" key={eachItem}>
+                                        <span class={pillClass}>
+                                            <span class="slds-pill__label slds-p-horizontal_xx-small">{eachItem}</span>
+                                        </span>
+                                    </div>
+                                </template>
                             </template>
-                        </div>
-                    </template>
-                    <template lwc:else>
-                        <p class="slds-wrap">{csvValue}</p>
-                    </template>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- Empty Display -->
-    <template lwc:else>
-        <template lwc:if={showLabel}>
-            <div class={elementClass}>
-                <span class="slds-form-element__label">{recordFieldLabel}</span>
-                <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">
+                            <template lwc:else>
+                                <p class="slds-col slds-wrap slds-m-vertical_xx-small">{csvValue}</p>
+                            </template>
+                        </template>
+                        <template lwc:if={showEdit}>
+                            <div class="slds-col slds-grow-none slds-m-vertical_xx-small" >
+                                <lightning-button-icon  icon-name="utility:edit"        variant="bare"
+                                                        alternative-text={editTitle}    title={editTitle}
+                                                        onclick={toggleEdit}>
+                                </lightning-button-icon>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
         </template>
-    </template>
+    </div>
 
-    <!-- Component Display -->
+    <!-- Debug info Display -->
     <template lwc:if={isDebug}>
         <div class="slds-box slds-theme_default slds-text-color_default slds-m-vertical_x-small">
             <dl class="slds-dl_horizontal slds-text-align_left">
                 <dt class="slds-dl_horizontal__label slds-truncate">Variant:</dt>
-                <dd class="slds-dl_horizontal__detail">{variant}</dd>
+                <dd class="slds-dl_horizontal__detail">{variant} - read-only? {isReadOnly}</dd>
                 <dt class="slds-dl_horizontal__label slds-truncate">Field:</dt>
-                <dd class="slds-dl_horizontal__detail">{recordField}</dd>
+                <dd class="slds-dl_horizontal__detail">{recordField} - edit? {isFieldEditable}</dd>
                 <dt class="slds-dl_horizontal__label slds-truncate">Context:</dt>
                 <dd class="slds-dl_horizontal__detail">{objectApiName}  - ID: {recordId} - RT: {recordTypeId}</dd>
                 <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
@@ -68,7 +75,7 @@
             </dl>
         </div>
     </template>
-    <div class="slds-form-element__static">
-    </div>
+    <!--<div class="slds-form-element__static">
+    </div>-->
 
 </template>

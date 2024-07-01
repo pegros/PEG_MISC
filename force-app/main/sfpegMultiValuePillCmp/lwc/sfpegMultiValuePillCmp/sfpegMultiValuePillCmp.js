@@ -32,9 +32,8 @@
 
 import { LightningElement, api , wire } from 'lwc';
 import { getRecord }            from 'lightning/uiRecordApi';
-/*import { getPicklistValues }    from 'lightning/uiObjectInfoApi';*/
+///import { getPicklistValues }    from 'lightning/uiObjectInfoApi';
 import { getObjectInfo }        from 'lightning/uiObjectInfoApi';
-
 export default class SfpegMultiValuePillCmp extends LightningElement {
 
     //----------------------------------------------------------------
@@ -46,6 +45,8 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     @api showLabel;                 // Flag to display the field label
     @api variant;                   // Variant to display the tags (badge vs pills vs CSV)
     @api showBorder = false;        // Flag to display the bottom border below the field value (as in forms)
+    @api isReadOnly = false;        // Flag to enforce read-only mode
+    @api editTitlePrefix = 'Edit';  // Prefix for the edit button icon title
     @api isDebug = false;           // Flag to activate debug mode
 
     //----------------------------------------------------------------
@@ -53,10 +54,12 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     //----------------------------------------------------------------
     recordFieldName;            // picklist field API Name
     recordFieldLabel;           // picklist field Label
+    isFieldEditable = false;    // Flag to indicate that field is editable for the user
     recordFieldValue;           // picklist field value
     recordTypeId;               // record type ID of the current record
     recordFieldDesc;            // Description of the picklist field
     tags;                       // resulting tags coming from the picklist value.
+    isEditMode = false;         // Edit mode toggle state
 
     //----------------------------------------------------------------
     // Context parameters
@@ -68,7 +71,7 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     // Custom Getters
     //----------------------------------------------------------------
     get elementClass() {
-        return 'slds-form-element slds-form-element_readonly ' + (this.showBorder ? '' : ' noBottomBorder');
+        return 'slds-form-element slds-form-element_readonly slds-p-horizontal_medium' + (this.showBorder ? '' : ' noBottomBorder');
     }
     get isBadge() {
         return (this.variant === 'badge');
@@ -83,13 +86,25 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
         return (this.recordFieldValue?.displayValue?.replace(';',', '));
     }
 
+    get showEdit() {
+        return !this.isReadOnly && this.isFieldEditable;
+    }
+    get editTitle() {
+        return this.editTitlePrefix + ' ' + this.recordFieldLabel;
+    }
+    get fieldList() {
+        return [this.recordFieldName];
+    }
+
     //----------------------------------------------------------------
     // contextual Data Fetch  
     //----------------------------------------------------------------
     
+    //wiredObjectData;
     @wire(getObjectInfo, { objectApiName: "$objectApiName" })
     wiredObject({ error, data }) {
         if (this.isDebug) console.log('wiredObject: START with ', this.objectApiName);
+        //this.wiredObjectData = data;
         if (data) {
             if (this.isDebug) console.log('wiredObject: defaultRecordTypeId ', data.defaultRecordTypeId);
             if (this.isDebug) console.log('wiredObject: data ', JSON.stringify(data));
@@ -97,6 +112,8 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
             if (this.isDebug) console.log('wiredObject: recordFieldDesc set ', JSON.stringify(this.recordFieldDesc));
             this.recordFieldLabel = this.recordFieldDesc?.label;
             if (this.isDebug) console.log('wiredObject: recordFieldLabel set ', this.recordFieldLabel);
+            this.isFieldEditable = this.recordFieldDesc?.updateable
+            if (this.isDebug) console.log('wiredObject: isFieldEditable set ', this.isFieldEditable);
         }
         if (this.isDebug) console.log('wiredObject: END');
     }
@@ -116,7 +133,7 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
             this.recordFieldValue = data.fields[this.recordFieldName];
             if (this.isDebug) console.log('wiredRecord: field Value registered ', JSON.stringify(this.recordFieldValue));
 
-            if (this.recordFieldValue.displayValue) {
+            if (this.recordFieldValue?.displayValue) {
                 this.tags = this.recordFieldValue.displayValue.split(';');
                 if (this.isDebug) console.log('wiredRecord: tags extracted', JSON.stringify(this.tags));
             }
@@ -124,16 +141,20 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
                 if (this.isDebug) console.log('wiredRecord: no tag to display');
                 this.tags = null;
             }
+
+            /*if (this.isDebug) console.log('wiredRecord: wiredObjectData fetched ', JSON.stringify(this.wiredObjectData));
+            let recordInput = generateRecordInputForUpdate(data, this.wiredObjectData);
+            if (this.isDebug) console.log('wiredRecord: recordInput init ', JSON.stringify(recordInput));
+
+            if (this.isDebug) console.log('wiredRecord: checking recordFieldName ', this.recordFieldName);
+            this.isRecordEditable = recordInput.fields.hasOwnProperty(this.recordFieldName) || false;
+            if (this.isDebug) console.log('wiredRecord: isRecordEditable init ', this.isRecordEditable);*/
         }
         else if (error) {
             console.warn('wiredRecord: error raised ', JSON.stringify(error));
-            /*this.errorMessage = "Field value retrieval issue!";
-            this.isReady = true;*/
         }
         else {
             if (this.isDebug) console.log('wiredRecord: no data/error returned yet');
-            //this.errorMessage = "No data returned!";
-            //this.isReady = true;
         }
 
         if (this.isDebug) console.log('wiredRecord: END');
@@ -168,16 +189,29 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     // Component Initialisation
     //----------------------------------------------------------------
     connectedCallback() {
-        if (this.isDebug) console.log('connected: START pill for field ',this.recordField);
-        if (this.isDebug) console.log('connected: objectApiName provided ',this.objectApiName);
-        if (this.isDebug) console.log('connected: recordId provided ',this.recordId);
+        if (this.isDebug) {
+            console.log('connected: START pill for field ',this.recordField);
+            console.log('connected: objectApiName provided ',this.objectApiName);
+            console.log('connected: recordId provided ',this.recordId);
+            console.log('connected: variant provided ',this.variant);
+        }
         this.recordFieldName = this.recordField?.split('.')?.pop();
         if (this.isDebug) console.log('connected: recordFieldName extracted ',this.recordFieldName);
-        if (this.isDebug) console.log('connected: variant provided ',this.variant);
         if (this.isDebug) console.log('connected: END pill');
     }
 
-    
+    //----------------------------------------------------------------
+    // Event Handlers 
+    //----------------------------------------------------------------
+    toggleEdit(event) {
+        if (this.isDebug) console.log('toggleEdit: START Pill ',this.recordFieldName);
+        this.isEditMode = true;
+        if (this.isDebug) console.log('toggleEdit: END Pill with isEditMode ',this.isEditMode);
+    }
 
-
+    handleSuccess(event) {
+        if (this.isDebug) console.log('handleSuccess: START Pill ',this.recordFieldName);
+        this.isEditMode = false;
+        if (this.isDebug) console.log('handleSuccess: END Pill with isEditMode ',this.isEditMode);
+    }
 }
