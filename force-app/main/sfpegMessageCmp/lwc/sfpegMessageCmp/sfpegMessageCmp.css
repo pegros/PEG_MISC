@@ -6,18 +6,31 @@
     background-color : var(--lwc-colorBackgroundToastSuccess,rgb(4, 132, 75)) !important;
 }
 .slds-theme_warning {
-    padding-top: 0px !important;
+    /*padding-top: 0px !important;*/
     background-color : var(--lwc-colorBackgroundToastWarning,rgb(255, 158, 44)) !important;
 }
 .slds-theme_error {
-    padding-top: 0px !important;
+    /*padding-top: 0px !important;*/
     background-color : var(--lwc-colorBackgroundToastError,rgb(194, 57, 52)) !important;
 }
 /*.slds-theme_inverse {
     background-color : var(--lwc-brandBackgroundPrimary,rgb(1, 68, 134)) !important;
 }*/
+/* OVERRIDE SLDS overrides in tabs*/
+.slds-p-around_xx-small {
+    padding: var(--lwc-spacingXxSmall,0.25rem)
+}
 .slds-p-around_x-small {
     padding: var(--lwc-spacingXSmall,0.5rem) !important;
+}
+.slds-p-around_small {
+    padding: var(--lwc-spacingSmall,0.75rem) !important;
+}
+.slds-p-around_medium {
+    padding: var(--lwc-spacingMedium,1rem)
+}
+.slds-p-around_large {
+    padding: var(--lwc-spacingLarge,1.5rem)
 }
 .onlineHelp {
     display: inline-block;
