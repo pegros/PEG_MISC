@@ -16,7 +16,7 @@ field value in a more graphical and user-friendly way:
 
 ![MultiValue Display in pill mode](/media/sfpegMultiValuePillPill.png)
 
-ℹ️ Pending evolution for the capacity to switch to edit mode.
+ℹ️ Text fields containing `;`separated values are also supported in addition to standard (multi-)picklist fields.
 
 ## Configuration
 
@@ -26,6 +26,7 @@ All the configuration of the **sfpegMultiValuePillCmp** component is done in the
 
 The following properties are available for configuration:
 * `Record Field`: (Multi-)Picklist field to be used on current record (as _Object.Field_ API names) directly available from dropdown.
+* `Record Text Field`:  Text field (containing ; separated values) to be used instead of a picklist field on current record (as _Field_ API name). Used only if no picklist field is selected.
 * `Display Variant`: Display variant of each value (badge, pill or text)
 directly available from dropdown.
 * `Show Label?`: Flag to show the field label above the value.

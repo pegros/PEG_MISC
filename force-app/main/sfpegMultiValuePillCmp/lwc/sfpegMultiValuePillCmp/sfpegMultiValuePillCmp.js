@@ -42,6 +42,7 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     @api wrapperCss;                // CSS classes for the wrapping <div>
     @api tagCss;                    // CSS classes for the individual badges
     @api recordField;               // Name of the picklist field on the current record (as "Object.Field" API Names)
+    @api recordTextField;           // Name of a text field containing ; separated values
     @api showLabel;                 // Flag to display the field label
     @api variant;                   // Variant to display the tags (badge vs pills vs CSV)
     @api showBorder = false;        // Flag to display the bottom border below the field value (as in forms)
@@ -83,7 +84,7 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
         return 'slds-pill ' + this.tagCss;
     }
     get csvValue() {
-        return (this.recordFieldValue?.displayValue?.replace(';',', '));
+        return (this.recordFieldValue?.displayValue?.replaceAll(';',', ')) || (this.recordFieldValue?.value?.replaceAll(';',', '));
     }
 
     get showEdit() {
@@ -99,7 +100,7 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
     //----------------------------------------------------------------
     // contextual Data Fetch  
     //----------------------------------------------------------------
-    
+    //= 'MotifRenouvellement__c'
     //wiredObjectData;
     @wire(getObjectInfo, { objectApiName: "$objectApiName" })
     wiredObject({ error, data }) {
@@ -135,7 +136,11 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
 
             if (this.recordFieldValue?.displayValue) {
                 this.tags = this.recordFieldValue.displayValue.split(';');
-                if (this.isDebug) console.log('wiredRecord: tags extracted', JSON.stringify(this.tags));
+                if (this.isDebug) console.log('wiredRecord: tags extracted from display value ', JSON.stringify(this.tags));
+            }
+            else if (this.recordFieldValue?.value) {
+                this.tags = this.recordFieldValue.value.split(';');
+                if (this.isDebug) console.log('wiredRecord: tags extracted from value ', JSON.stringify(this.tags));
             }
             else {
                 if (this.isDebug) console.log('wiredRecord: no tag to display');
@@ -192,10 +197,14 @@ export default class SfpegMultiValuePillCmp extends LightningElement {
         if (this.isDebug) {
             console.log('connected: START pill for field ',this.recordField);
             console.log('connected: objectApiName provided ',this.objectApiName);
+            console.log('connected: recordTextField provided ',this.recordTextField);
             console.log('connected: recordId provided ',this.recordId);
             console.log('connected: variant provided ',this.variant);
         }
-        this.recordFieldName = this.recordField?.split('.')?.pop();
+
+        this.recordField = (this.recordField == 'N/A') ? this.objectApiName + '.' + this.recordTextField : this.recordField;
+        if (this.isDebug) console.log('connected: recordField reset ',this.recordField);
+        this.recordFieldName = this.recordField?.split('.').pop();
         if (this.isDebug) console.log('connected: recordFieldName extracted ',this.recordFieldName);
         if (this.isDebug) console.log('connected: END pill');
     }
