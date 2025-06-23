@@ -1,11 +1,11 @@
 <template>
     <div class={wrapperCss}>
-        <template if:true={isReady}>
+        <template lwc:if={isReady}>
             <!-- Selector Display -->
-            <template if:true={displayOptions}>
+            <template lwc:if={displayOptions}>
 
                 <!-- Selector Picklist Mode pull-to-boundary="small" -->
-                <template if:true={isPicklist}>
+                <template lwc:if={isPicklist}>
                     <lightning-layout multiple-rows  vertical-align="center">
                         <template if:true={headerTitle}>
                             <lightning-layout-item flexibility="auto, no-shrink" alignment-bump="left" class="headerContainer">
@@ -15,32 +15,57 @@
                                 </lightning-formatted-text>
                             </lightning-layout-item>
                         </template>
-                        <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
-                            <lightning-button-menu  label={selectedLabel}
-                                                    alternative-text="Picklist Selector"
-                                                    onselect={handleSelect} >
-                                <template for:each={displayOptions} for:item="iter">
-                                    <lightning-menu-item    key={iter.value}    label={iter.label}
-                                                            value={iter}       
-                                                            prefix-icon-name={iter.icon}>
-                                    </lightning-menu-item>
-                                </template>
-                            </lightning-button-menu>
-                        </lightning-layout-item>
+                        <template lwc:if={isReadOnly}>
+                            <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
+                                <lightning-button-menu  label={selectedLabel}
+                                                        alternative-text="Picklist Selector"
+                                                        disabled >
+                                    <template for:each={displayOptions} for:item="iter">
+                                        <lightning-menu-item    key={iter.value}    label={iter.label}
+                                                                value={iter}       
+                                                                prefix-icon-name={iter.icon}>
+                                        </lightning-menu-item>
+                                    </template>
+                                </lightning-button-menu>
+                            </lightning-layout-item>
+                        </template>
+                        <template lwc:else>
+                            <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
+                                <lightning-button-menu  label={selectedLabel}
+                                                        alternative-text="Picklist Selector"
+                                                        onselect={handleSelect} >
+                                    <template for:each={displayOptions} for:item="iter">
+                                        <lightning-menu-item    key={iter.value}    label={iter.label}
+                                                                value={iter}       
+                                                                prefix-icon-name={iter.icon}>
+                                        </lightning-menu-item>
+                                    </template>
+                                </lightning-button-menu>
+                            </lightning-layout-item>
+                        </template>
                     </lightning-layout>
                 </template>
 
                 <!-- Selector Radio Group Mode -->
-                <template if:true={isRadio}>
-                    <lightning-radio-group  name="radioGroup"           label={headerTitle}
-                                            options={displayOptions}    value={selectedOption}
-                                            type="radio"                variant="label-inline"
-                                            onchange={handleChange}>
-                    </lightning-radio-group>
+                <template lwc:elseif={isRadio}>
+                    <template lwc:if={isReadOnly}>
+                        <lightning-radio-group  name="radioGroup"           label={headerTitle}
+                                                options={displayOptions}    value={selectedOption}
+                                                type="radio"                variant="label-inline"
+                                                disabled>
+                        </lightning-radio-group>
+                    </template>
+                    <template lwc:else>
+                        <lightning-radio-group  name="radioGroup"           label={headerTitle}
+                                                options={displayOptions}    value={selectedOption}
+                                                type="radio"                variant="label-inline"
+                                                onchange={handleChange}>
+                        </lightning-radio-group>
+                    </template>
                 </template>
 
                 <!-- Selector Buttons Mode pull-to-boundary="small"-->
-                <template if:true={isButtons}>
+                <template lwc:elseif={isButtons}>
                     <lightning-layout multiple-rows  vertical-align="center">
                         <template if:true={headerTitle}>
                             <lightning-layout-item flexibility="auto, no-shrink" alignment-bump="left" class="headerContainer">
@@ -50,21 +75,35 @@
                                 </lightning-formatted-text>
                             </lightning-layout-item>
                         </template>
-                        <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
-                            <lightning-button-group>
-                                <template for:each={displayOptions} for:item="iter">
-                                    <lightning-button   key={iter.value}        label={iter.label}
-                                                        variant={iter.variant}  value={iter}
-                                                        onclick={handleClick}>
-                                    </lightning-button>
-                                </template>
-                            </lightning-button-group>
-                        </lightning-layout-item>
+                        <template lwc:if={isReadOnly}>
+                            <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
+                                <lightning-button-group>
+                                    <template for:each={displayOptions} for:item="iter">
+                                        <lightning-button   key={iter.value}        label={iter.label}
+                                                            variant={iter.variant}  value={iter}
+                                                            disabled>
+                                        </lightning-button>
+                                    </template>
+                                </lightning-button-group>
+                            </lightning-layout-item>
+                        </template>
+                        <template lwc:else>
+                            <lightning-layout-item flexibility="auto, no-shrink, no-grow" alignment-bump="right">
+                                <lightning-button-group>
+                                    <template for:each={displayOptions} for:item="iter">
+                                        <lightning-button   key={iter.value}        label={iter.label}
+                                                            variant={iter.variant}  value={iter}
+                                                            onclick={handleClick}>
+                                        </lightning-button>
+                                    </template>
+                                </lightning-button-group>
+                            </lightning-layout-item>
+                        </template>
                     </lightning-layout>
                 </template>
 
                 <!-- Selector Tabs Mode -->
-                <template if:true={isTabs}>
+                <template lwc:elseif={isTabs}>
                     <template if:true={headerTitle}>
                         <div class="headerContainer">
                             <lightning-formatted-text   value={headerTitle}
@@ -73,19 +112,18 @@
                             </lightning-formatted-text>
                         </div>
                     </template>
-                    <lightning-tabset   active-tab-value={selectedOption}
-                                        variant="standard"  class="slds-tabs_medium" >
-                        <template for:each={displayOptions} for:item="iter">
-                            <lightning-tab  key={iter.value}        label={iter.label}
-                                            value={iter.value}
-                                            onactive={handleActivate}>
-                            </lightning-tab>
-                        </template>
-                    </lightning-tabset>
+                        <lightning-tabset   active-tab-value={selectedOption}
+                                            variant="standard"  class="slds-tabs_medium" >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-tab  key={iter.value}        label={iter.label}
+                                                value={iter.value}      onactive={handleActivate}>
+                                </lightning-tab>
+                            </template>
+                        </lightning-tabset>
                 </template>
 
                 <!-- Selector TabsV (vertical) Mode -->
-                <template if:true={isTabsV}>
+                <template lwc:elseif={isTabsV}>
                     <template if:true={headerTitle}>
                         <div class="headerContainer">
                             <lightning-formatted-text   value={headerTitle}
@@ -94,19 +132,18 @@
                             </lightning-formatted-text>
                         </div>
                     </template>
-                    <lightning-tabset   active-tab-value={selectedOption}
-                                        variant="vertical"  class="slds-tabs_medium" >
-                        <template for:each={displayOptions} for:item="iter">
-                            <lightning-tab  key={iter.value}        label={iter.label}
-                                            value={iter.value}
-                                            onactive={handleActivate}>
-                            </lightning-tab>
-                        </template>
-                    </lightning-tabset>
+                        <lightning-tabset   active-tab-value={selectedOption}
+                                            variant="vertical"  class="slds-tabs_medium" >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-tab  key={iter.value}        label={iter.label}
+                                                value={iter.value}      onactive={handleActivate}>
+                                </lightning-tab>
+                            </template>
+                        </lightning-tabset>
                 </template>
 
                 <!-- Selector Progress Mode -->
-                <template if:true={isProgress}>
+                <template lwc:elseif={isProgress}>
                     <template if:true={headerTitle}>
                         <div class="headerContainer">
                             <lightning-formatted-text   class={headerClass} 
@@ -114,17 +151,28 @@
                             </lightning-formatted-text>
                         </div>
                     </template>
-                    <lightning-progress-indicator current-step={selectedOption} type="base" variant="shaded" class={pathClass} >
-                        <template for:each={displayOptions} for:item="iter">
-                            <lightning-progress-step    key={iter.value}    label={iter.label}
-                                                        value={iter.value}  onstepfocus={handleFocus}>
-                            </lightning-progress-step>
-                        </template>
-                    </lightning-progress-indicator>
+                    <template lwc:if={isReadOnly}>
+                        <lightning-progress-indicator current-step={selectedOption} type="base" variant="shaded" class={pathClass} >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-progress-step    key={iter.value}    label={iter.label}
+                                                            value={iter.value} >
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </template>
+                    <template lwc:else>
+                        <lightning-progress-indicator current-step={selectedOption} type="base" variant="shaded" class={pathClass} >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-progress-step    key={iter.value}    label={iter.label}
+                                                            value={iter.value}  onstepfocus={handleFocus}>
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </template>
                 </template>
 
                 <!-- Selector Path Mode -->
-                <template if:true={isPath}>
+                <template lwc:elseif={isPath}>
                     <template if:true={headerTitle}>
                         <div class="headerContainer">
                             <lightning-formatted-text   value={headerTitle}
@@ -133,18 +181,29 @@
                             </lightning-formatted-text>
                         </div>
                     </template>
-                    <lightning-progress-indicator current-step={selectedOption} type="path" variant="shaded" class={pathClass} >
-                        <template for:each={displayOptions} for:item="iter">
-                            <lightning-progress-step    key={iter.value}    label={iter.label}
-                                                        value={iter.value}  onstepfocus={handleFocus}>
-                            </lightning-progress-step>
-                        </template>
-                    </lightning-progress-indicator>
+                    <template lwc:if={isReadOnly}>
+                        <lightning-progress-indicator current-step={selectedOption} type="path" variant="shaded" class={pathClass} >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-progress-step    key={iter.value}    label={iter.label}
+                                                            value={iter.value}>
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </template>
+                    <template lwc:else>
+                        <lightning-progress-indicator current-step={selectedOption} type="path" variant="shaded" class={pathClass} >
+                            <template for:each={displayOptions} for:item="iter">
+                                <lightning-progress-step    key={iter.value}    label={iter.label}
+                                                            value={iter.value}  onstepfocus={handleFocus}>
+                                </lightning-progress-step>
+                            </template>
+                        </lightning-progress-indicator>
+                    </template>
                 </template>
             </template>
 
             <!-- Error Message Display -->
-            <template if:true={errorMessage}>
+            <template lwc:elseif={errorMessage}>
                 <div class="slds-media slds-media_center slds-m-vertical_x-small slds-p-horizontal_x-small headerContainer">
                     <div class="slds-media__figure">
                         <lightning-icon icon-name="utility:error" size="x-small"
@@ -160,19 +219,19 @@
         </template>
 
         <!-- Loading Spinner Display -->
-        <template if:false={isReady}>
+        <template lwc:elseif={isLoading}>
             <lightning-spinner alternative-text={loadLabel} size="medium">
             </lightning-spinner>
         </template>
 
         <!-- Update Spinner Display -->
-        <template if:true={isUpdating}>
+        <template lwc:elseif={isUpdating}>
             <lightning-spinner alternative-text={updateLabel} size="small">
             </lightning-spinner>
         </template>
 
         <!-- Debug info Display -->
-        <template if:true={isDebug}>
+        <template lwc:if={isDebug}>
             <div class="slds-box slds-theme_default slds-text-color_default slds-m-top_x-small">
                 <dl class="slds-dl_horizontal slds-text-align_left">
                     <dt class="slds-dl_horizontal__label slds-truncate">Mode selected:</dt>
@@ -196,32 +255,17 @@
     </div>
 
     <!-- Data and Metadata Loader (to ensure better coverage than with @wire methods) -->
-    <template if:true={_recordFieldShort}>
+    <template lwc:if={_recordFieldShort}>
         <div class="slds-hide">
-            <!--
-            <template if:true={isUser}>
-                <lightning-record-edit-form record-id={_recordId}
-                                            object-api-name={_objectApiName}
-                                            onload={handleLoad}>
-                    <lightning-input-field  data-my-id="picklistValue"
-                                            field-name={_recordFieldShort}>
-                    </lightning-input-field>
-                </lightning-record-edit-form>
-            </template>
-            <template if:false={isUser}>
-            -->
-                <lightning-record-edit-form record-id={_recordId}
-                                            object-api-name={_objectApiName}
-                                            record-type-id={_recordTypeId} 
-                                            onload={handleLoad}
-                                            onerror={handleError}>
-                    <lightning-input-field  data-my-id="picklistValue"
-                                            field-name={_recordFieldShort}>
-                    </lightning-input-field>
-                </lightning-record-edit-form>
-            <!-- 
-            </template>
-            -->
+            <lightning-record-edit-form record-id={_recordId}
+                                        object-api-name={_objectApiName}
+                                        record-type-id={_recordTypeId} 
+                                        onload={handleLoad}
+                                        onerror={handleError}>
+                <lightning-input-field  data-my-id="picklistValue"
+                                        field-name={_recordFieldShort}>
+                </lightning-input-field>
+            </lightning-record-edit-form>
         </div>
     </template>
 </template>

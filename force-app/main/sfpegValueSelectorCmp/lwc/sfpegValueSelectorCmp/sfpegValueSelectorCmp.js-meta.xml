@@ -41,6 +41,12 @@
                         datasource="apex://sfpegPicklistUserSelector_CTL"
                         description="Picklist field to be used on current user (if no Record picklist selected)."/>
 
+            <property   name="isReadOnly"
+                        label="Read-Only?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to set the component in read-only mode (not applicable to tab display modes)?"/>
+
             <property   name="isDebug"
                         label="Debug?"
                         type="Boolean"
@@ -75,6 +81,12 @@
                         datasource="apex://sfpegPicklistUserSelector_CTL"
                         description="Picklist field to be used on current user (if no Record picklist selected)"/>
             
+            <property   name="isReadOnly"
+                        label="Read-Only?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to set the component in read-only mode (not applicable to tab display modes)?"/>
+
             <property   name="isDebug"
                         label="Debug?"
                         type="Boolean"

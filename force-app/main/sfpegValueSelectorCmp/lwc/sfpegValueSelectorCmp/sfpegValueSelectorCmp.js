@@ -51,6 +51,7 @@ export default class SfpegValueSelectorCmp extends LightningElement {
     @api displayMode = 'picklist';  // Display mode for the Selector (path, progress, tabs, buttons, picklist, radio, tabsV)
     @api recordField;               // API Name of the picklist field on the current record
     @api userField;                 // API Name of the picklist field on the current user
+    @api isReadOnly = false;        // Flag to activate read-only mode
     @api isDebug = false;           // Flag to activate debug mode
 
     //----------------------------------------------------------------
@@ -112,6 +113,9 @@ export default class SfpegValueSelectorCmp extends LightningElement {
     }
     get isPath() {
         return this.displayMode === 'path';
+    }
+    get isLoading() {
+        return !this.isReady;
     }
     /*get selectedLabel() {
         return this._recordFieldValue?.label;
