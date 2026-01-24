@@ -26,6 +26,12 @@ This package provides a set of App/Community Builder components listed hereafter
 Detailed information about these components (behaviour, configuration guidelines,
 technical implementation principles) is available in their dedicated pages.
 
+### [sfpegAddressMapCmp](/help/sfpegAddressMapCmp.md)
+This component enables to display a card with up to 5 address field values of a record
+displayed in a map.
+
+![Address map in standard mode](/media/sfpegAddressMap.png)
+
 ### [sfpegRelatedListKpisCmp](/help/sfpegRelatedListKpisCmp.md)
 This component enables to display a set of related list record counts (and sums) in a graphical way.
 
@@ -85,8 +91,30 @@ in a configurable (and contextualisable) Name list.
 
 ![Chatter Group Selector](/media/sfpegChatterGroupSelector.png) 
 
-## Technical Details
+
+## Installation
 
 Each App Builder component is packaged independently and may be deployed on a standalone basis.
 Each package basically contains the component (usually LWC) as well as some supporting Apex classes
 and custom labels.
+
+For a quick and easy deployment, you may deploy all these components at once via the following deploy button
+leveraging the **[GitHub Salesforce Deploy Tool](https://github.com/afawcett/githubsfdeploy)**
+implemented by [Andrew Fawcett](https://andyinthecloud.com/2013/09/24/deploy-direct-from-github-to-salesforce/).
+
+<a href="https://githubsfdeploy.herokuapp.com?ref=master">
+  <img alt="Deploy Package to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
+
+## Release Notes
+
+ℹ️ As this repository is not yet distributed as **unlocked package**, there is no real
+package version. This section however summarizes the timeline and contents of the main
+evolutions made.
+
+### Jan. 2026
+
+Changes to the package:
+* Addition of the **[sfpegAddressMapCmp](/help/sfpegAddressMapCmp.md)** map component

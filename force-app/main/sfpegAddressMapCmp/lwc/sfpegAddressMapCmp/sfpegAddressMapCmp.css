@@ -1,0 +1,9 @@
+.footerContent {
+    width:100%;
+    word-break: break-all;
+    text-align:left;
+}
+lightning-map {
+    --slds-c-button-text-color: var(--slds-g-color-neutral-base-100);
+}
+/*--slds-c-card-text-color*/
