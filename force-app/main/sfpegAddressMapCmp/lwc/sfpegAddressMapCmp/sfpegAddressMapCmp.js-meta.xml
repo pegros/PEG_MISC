@@ -41,7 +41,7 @@
                         datasource="apex://sfpegAddressSelector_CTL"
                         description="Field providing a second Address in the current record." />
             <property   name="icon2"
-                        label="Icon #1"
+                        label="Icon #2"
                         type="String"
                         default="standard:address"
                         description="Icon for the second Address." />

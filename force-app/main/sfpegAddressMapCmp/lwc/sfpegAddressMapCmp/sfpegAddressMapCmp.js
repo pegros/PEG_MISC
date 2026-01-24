@@ -165,9 +165,14 @@ export default class SfpegAddressMapCmp extends LightningElement {
             locationList.forEach(iterLoc => {
                 if (this.isDebug) console.log('wiredObject: processing location field', iterLoc.field);
                 const locDesc = this.initLocationFields(iterLoc.field,iterLoc.icon,data);
-                recordFieldList = [...recordFieldList, ...locDesc.fields];
-                this.locationFieldMap[locDesc.name] = locDesc;
-                console.log('wiredObject: location desc registered', JSON.stringify(locDesc));
+                if (this.locationFieldMap[locDesc.name]) {
+                    console.log('wiredObject: location desc already registered', locDesc.name);
+                }
+                else {
+                    recordFieldList = [...recordFieldList, ...locDesc.fields];
+                    this.locationFieldMap[locDesc.name] = locDesc;
+                    console.log('wiredObject: new location desc registered', JSON.stringify(locDesc));
+                }
             });
             this.recordFieldList = recordFieldList;
 
